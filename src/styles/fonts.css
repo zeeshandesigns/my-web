@@ -1,0 +1,52 @@
+/*
+ * GT Walsheim is a commercial typeface.
+ * This file is intentionally NOT imported until valid licensed webfont assets
+ * are available under public/fonts/.
+ *
+ * Once the files are present, add:
+ *   import '../styles/fonts.css';
+ * to src/layouts/BaseLayout.astro (before global.css).
+ * Montserrat remains the body font.
+ */
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Light-Oblique.woff') format('woff');
+  font-weight: 300;
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Regular-Oblique.woff') format('woff');
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'GT Walsheim';
+  src: url('/fonts/GT-Walsheim-Bold-Oblique.woff') format('woff');
+  font-weight: 700;
+  font-style: oblique;
+  font-display: swap;
+}
