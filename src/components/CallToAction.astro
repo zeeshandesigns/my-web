@@ -5,7 +5,7 @@ const { variant = 'page' } = Astro.props;
 ---
 <section class:list={['cta', {'site-bottom-cta': variant === 'page'}]}>
   <div class="container"><div class="cta-shell">
-    <span class="eyebrow">{variant === 'home' ? '07 / LET'S CONNECT' : 'OPEN TO OPPORTUNITIES'}</span>
+    <span class="eyebrow">{variant === 'home' ? "07 / LET'S CONNECT" : 'OPEN TO OPPORTUNITIES'}</span>
     {variant === 'home' ? <h2>Open to the right <span>opportunity.</span></h2> : <h2>Let’s make something <span>meaningful.</span></h2>}
     <p>{variant === 'home' ? 'I’m interested in remote and international opportunities where I can contribute through multidisciplinary design, work with thoughtful teams and keep growing.' : 'I’m interested in remote and international design roles where I can contribute, collaborate and continue growing.'}</p>
     <a class="btn btn-blue" href={`mailto:${profile.email}`}>Get in touch <span aria-hidden="true">↗</span></a>
