@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 const escapeXml = (value: string) => value.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 export const GET: APIRoute = async ({ site }) => {
   const base = site ?? new URL('https://example.com');
-  const notes = (await getCollection('notes', ({data}) => !data.draft && data.publishedAt.getTime() <= Date.now()))
+  const notes = (await getCollection('notes', ({data}) => !data.draft))
     .sort((a,b) => b.data.publishedAt.getTime()-a.data.publishedAt.getTime());
   const feed = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
