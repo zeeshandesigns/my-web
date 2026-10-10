@@ -1,0 +1,47 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import IntroBar from '../components/IntroBar.astro';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+interface Props { title: string; description: string; image?: string; noindex?: boolean; }
+const { title, description, image, noindex = false } = Astro.props;
+// Do not index WIP or preview builds. Enable explicitly only at public launch.
+const indexingEnabled = import.meta.env.PUBLIC_ALLOW_INDEXING === 'true' && Astro.site?.hostname !== 'example.com';
+const shouldNoindex = noindex || !indexingEnabled;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
+const fullTitle = title === profile.name ? `${profile.name} — Multidisciplinary Designer` : `${title} — ${profile.name}`;
+const ogImage = image ? new URL(image, canonical).href : undefined;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content={description} />
+    {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonical.href} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical.href} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-wrap">
+      <Header />
+      <IntroBar />
+      <main id="main-content"><slot /></main>
+      <Footer />
+    </div>
+    <script>import '../scripts/site';</script>
+  </body>
+</html>

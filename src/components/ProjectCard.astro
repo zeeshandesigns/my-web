@@ -1,0 +1,13 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ProjectVisual from './ProjectVisual.astro';
+interface Props { project: CollectionEntry<'projects'>; index?: number; featured?: boolean; }
+const {project,index, featured=false} = Astro.props;
+const {data} = project;
+---
+<article class="project" data-type={data.filters.join(' ')}>
+  <a class="card-open" href={`/work/${project.id}/`} aria-label={`View ${data.title} case study`}>
+    <ProjectVisual title={data.title} preview={data.preview} cover={data.cover} />
+    <div class="project-meta"><div><div class="project-name">{data.title}</div><div class="project-desc">{data.tags.join(' · ') || data.category.toUpperCase()}</div><div style="margin-top:10px"><span class="tag">{data.category === 'ui' ? 'UI/UX' : data.category === 'social' ? 'Social Media' : 'Development'}</span>{featured && <span class="tag">Featured</span>}</div></div>{index !== undefined && <span class="project-index">{String(index).padStart(2,'0')} / {featured ? '04' : '08'}</span>}</div>
+  </a>
+</article>

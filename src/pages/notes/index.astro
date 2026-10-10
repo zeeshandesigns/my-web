@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import { getCollection } from 'astro:content';
+const notes = (await getCollection('notes',({data})=>!data.draft)).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
+---
+<BaseLayout title="Notes" description="Articles, design insights and a front-end learning log by Zeeshan Haider.">
+  <section class="page-hero"><div class="container"><div class="hero-columns"><div><span class="eyebrow">04 / ARTICLES & JOURNAL</span><h1 class="page-title">Notes from <span class="soft">the process.</span></h1><p class="page-lead">A place for design thinking, creative observations and honest updates as I learn how to build for the web.</p></div><div class="aside-note">Real writing will appear here as it is published. No fictional dates or articles.</div></div></div></section>
+  <section class="inner-section"><div class="container"><div class="section-head"><div><span class="eyebrow">AREAS OF INTEREST</span><h2 class="section-title">Three kinds of notes.</h2></div><p class="section-description">A simple editorial structure that can grow over time.</p></div><div class="expertise-grid"><article class="expertise-card"><span class="expertise-number">01 / WRITING</span><div class="icon-shape">✎</div><h3>Design articles</h3><p>Longer reflections on visual design, interfaces and the creative process.</p></article><article class="expertise-card"><span class="expertise-number">02 / OBSERVATIONS</span><div class="icon-shape">✳</div><h3>Creative insights</h3><p>Breakdowns, practical observations, and decisions from real design work.</p></article><article class="expertise-card"><span class="expertise-number">03 / PROGRESS</span><div class="icon-shape">&lt;/&gt;</div><h3>Learning log</h3><p>Short updates about learning HTML, CSS and front-end fundamentals.</p><a class="text-link" href="/notes/learning-log/">Follow the learning log ↗</a></article></div></div></section>
+  <section class="inner-section muted-bg"><div class="container"><div class="section-head"><div><span class="eyebrow">LATEST WRITING</span><h2 class="section-title">From the notebook.</h2></div></div>{notes.length ? <div class="entry-grid">{notes.map(n=><NoteCard note={n} />)}</div> : <div class="empty-notes"><h3>First note coming soon.</h3><p>I’ll publish articles and learning updates here as they're ready. The publishing system is built; the stories will be real.</p></div>}</div></section>
+  <CallToAction />
+</BaseLayout>

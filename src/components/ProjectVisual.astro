@@ -1,0 +1,31 @@
+---
+interface Props { title: string; preview?: string; cover?: string; reserved?: boolean; }
+const { title, preview = 'abstract', cover, reserved = false } = Astro.props;
+---
+{cover ? (
+  <div class="project-visual real-asset"><img class="asset-photo" src={cover} alt={`${title} project preview`} loading="lazy" /></div>
+) : reserved ? (
+  <div class="project-visual socialblank" role="img" aria-label="Reserved space for a verified social media campaign">
+    <div class="blank-grid"><div><span></span><span></span><em></em></div><div><span></span><span></span><em></em></div><div><span></span><span></span><em></em></div></div>
+    <span class="concept-chip">Featured campaign to select</span>
+  </div>
+) : preview === 'etg' ? (
+  <div class="project-visual etg" role="img" aria-label="Illustrative placeholder for Elite Top Guards">
+    <div class="window"><div class="window-bar"><em></em><em></em><em></em></div><div class="mock-web"><div class="mock-web-top"><b>ETG / DESIGN PREVIEW</b><small>HOME &nbsp; ABOUT &nbsp; CONTACT</small></div><div class="mock-web-body"><span class="web-head"></span><span class="web-head"></span><span class="web-desc"></span><span class="web-desc"></span></div></div></div>
+    <span class="concept-chip">Illustrative placeholder</span>
+  </div>
+) : preview === 'startex' ? (
+  <div class="project-visual startex" role="img" aria-label="Illustrative placeholder for Startex Marketing">
+    <div class="device"><header><i class="mark"></i><div class="menu"><i></i><i></i><i></i></div></header><div class="content"><div class="copy"><b></b><b></b><p></p><p></p></div><div class="visual"></div></div></div>
+    <span class="concept-chip">Illustrative placeholder</span>
+  </div>
+) : preview === 'pulse' ? (
+  <div class="project-visual pulse" role="img" aria-label="Illustrative placeholder for PULSE Real Estate">
+    <div class="social-row"><div class="social"><div class="lines">PULSE<br/>CAMPAIGN</div><div class="tower"></div></div><div class="social"><div class="lines">SOCIAL<br/>VISUALS</div><div class="tower"></div></div><div class="social"><div class="lines">EDITORIAL<br/>LAYOUT</div><div class="tower"></div></div></div>
+    <span class="concept-chip">Illustrative placeholder</span>
+  </div>
+) : (
+  <div class="project-visual abstract" role="img" aria-label={`Placeholder visual for ${title}`}>
+    <span class="abstract-circle"></span><span class="abstract-word">{title.length > 16 ? title.split(' ').slice(0, 2).join(' ') : title}</span><span class="abstract-sub">Visual work samples to be added</span><span class="concept-chip">Design placeholder</span>
+  </div>
+)}

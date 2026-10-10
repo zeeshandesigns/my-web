@@ -1,0 +1,24 @@
+---
+const route = Astro.url.pathname;
+const links = [
+  { name: 'Work', href: '/work/' },
+  { name: 'About', href: '/about/' },
+  { name: 'Resume', href: '/resume/' },
+  { name: 'Notes', href: '/notes/' },
+];
+const active = (href: string) => route === href || route.startsWith(href);
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a aria-label="Zeeshan Haider, home" class="identity" href="/">Zeeshan Haider<span class="dot">.</span></a>
+    <nav aria-label="Main navigation" class="desktop">
+      {links.map(link => <a href={link.href} class:list={{active: active(link.href)}} aria-current={active(link.href) ? 'page' : undefined}>{link.name}</a>)}
+    </nav>
+    <a class="btn btn-blue header-action" href="/contact/">Open to Opportunities <span aria-hidden="true">↗</span></a>
+    <button type="button" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle navigation" class="menu-toggle" id="menuToggle">☰</button>
+  </div>
+  <nav aria-label="Mobile navigation" class="mobile-menu" id="mobileMenu">
+    {links.map(link => <a href={link.href} aria-current={active(link.href) ? 'page' : undefined}>{link.name}</a>)}
+    <a href="/contact/" aria-current={route === '/contact/' ? 'page' : undefined}>Open to Opportunities ↗</a>
+  </nav>
+</header>

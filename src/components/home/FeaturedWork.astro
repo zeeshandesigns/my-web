@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import ProjectCard from '../ProjectCard.astro';
+import ReservedProject from '../ReservedProject.astro';
+const projectMap = new Map((await getCollection('projects', ({data}) => !data.draft)).map(p=>[p.id,p]));
+const featuredSlugs = ['elite-top-guards', 'startex-marketing', 'pulse-real-estate'];
+const featured = featuredSlugs.map(slug => projectMap.get(slug)).filter((p): p is CollectionEntry<'projects'> => p !== undefined);
+---
+<section class="section work" id="work"><div class="container">
+  <div class="section-head"><div><span class="eyebrow">01 / SELECTED WORK</span><h2 class="section-title">A few things I've worked on.</h2></div><p class="section-description">Interface design, visual campaigns and the details that make an idea work. Two UI projects and two social media features.</p></div>
+  <div class="project-grid">{featured.map((project,index) => <ProjectCard project={project} index={index+1} featured />)}<ReservedProject /></div>
+  <div class="work-foot"><a class="text-link" href="/work/">Explore the full portfolio <span aria-hidden="true">↗</span></a></div>
+</div></section>

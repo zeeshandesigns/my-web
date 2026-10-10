@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import CallToAction from '../../../components/CallToAction.astro';
+import NoteCard from '../../../components/NoteCard.astro';
+import { getCollection } from 'astro:content';
+const entries = (await getCollection('notes', ({data})=>!data.draft && data.category==='learning')).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
+---
+<BaseLayout title="Learning Log" description="Zeeshan Haider documents his journey as a beginner learning front-end development.">
+  <section class="page-hero"><div class="container"><div class="hero-columns"><div><div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/notes/">Notes</a><span>/</span><b>Learning log</b></div><h1 class="page-title">Learning <span class="soft">in public.</span></h1><p class="page-lead">I'm a beginner in front-end development. Rather than presenting a polished expert narrative, I'll document genuine progress, experiments, obstacles and lessons.</p></div><div class="aside-note">An evolving collection of lessons — not a polished expert roadmap.</div></div></div></section>
+  <section class="inner-section"><div class="container"><div class="section-head"><div><span class="eyebrow">WHERE I’M STARTING</span><h2 class="section-title">A designer learning to build.</h2></div><p class="section-description">HTML and CSS fundamentals first, then increasingly practical implementations.</p></div><div class="expertise-grid"><article class="expertise-card"><span class="expertise-number">FOUNDATION</span><h3>HTML & CSS</h3><p>Getting comfortable with structure, responsive layouts, semantics and styling.</p></article><article class="expertise-card"><span class="expertise-number">PRACTICE</span><h3>Small builds</h3><p>Documenting real exercises and progress without inventing accomplishments.</p></article><article class="expertise-card"><span class="expertise-number">CONNECTION</span><h3>Design to development</h3><p>Connecting what I know from visual and interface design with code.</p></article></div></div></section>
+  <section class="inner-section muted-bg"><div class="container"><div class="section-head"><div><span class="eyebrow">LEARNING JOURNAL</span><h2 class="section-title">Entries will appear here.</h2></div></div>{entries.length ? <div class="entry-grid">{entries.map(entry=><NoteCard note={entry} />)}</div> : <div class="empty-notes"><h3>No dated entries yet.</h3><p>When the first real learning update is ready, it will appear here.</p></div>}</div></section>
+  <CallToAction />
+</BaseLayout>
