@@ -2,6 +2,11 @@
 import type { CollectionEntry } from 'astro:content';
 interface Props { note: CollectionEntry<'notes'> }
 const { note } = Astro.props;
-const category = {article:'Article',insight:'Design Insight',learning:'Learning Log'}[note.data.category];
+const category = { article:'Article', insight:'Design Insight', learning:'Learning Log' }[note.data.category];
 ---
-<a class="entry-card" href={`/notes/${note.id}/`}><span class="eyebrow">{category}</span><h3>{note.data.title}</h3><p>{note.data.description}</p><div class="article-meta"><time datetime={note.data.publishedAt.toISOString()}>{note.data.publishedAt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</time>{note.data.tags.map(tag=><span>#{tag}</span>)}</div></a>
+<a class="entry-card" href={`/notes/${note.id}/`} data-note-category={note.data.category} data-search={`${note.data.title} ${note.data.description} ${note.data.tags.join(' ')}`}>
+  <span class="eyebrow">{category}</span>
+  <h3>{note.data.title}</h3><p>{note.data.description}</p>
+  <div class="article-meta"><time datetime={note.data.publishedAt.toISOString()}>{note.data.publishedAt.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})}</time>{note.data.tags.slice(0,3).map(tag=><span>#{tag}</span>)}</div>
+  <span class="text-link" aria-hidden="true">Read note ↗</span>
+</a>

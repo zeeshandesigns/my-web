@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../data/profile';
+---
+<BaseLayout title="Privacy" description="A clear explanation of privacy practices on Zeeshan Haider's personal portfolio.">
+  <section class="page-hero"><div class="container"><span class="eyebrow">SITE INFORMATION</span><h1 class="page-title">Privacy, <span class="soft">simply.</span></h1><p class="page-lead">This is a static personal portfolio. It is intended to make my work and professional background easy to explore—not to collect data from visitors.</p></div></section>
+  <section class="inner-section"><div class="container prose privacy-copy">
+    <h2>Contact</h2><p>There is no contact form on this website. If you choose to email me, the details you share are processed by your email provider and mine as part of our correspondence. You can write to <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+    <h2>Analytics and cookies</h2><p>The website source does not include advertising trackers, first-party analytics, or a cookie-consent mechanism. Its owner can review this policy if optional services are added later.</p>
+    <h2>Fonts and external websites</h2><p>Montserrat may be loaded from Google Fonts. Your browser can contact Google's servers to retrieve that font. Links to LinkedIn, GitHub, or other sites take you to services with their own privacy policies.</p>
+    <h2>Hosting</h2><p>Whichever hosting provider serves this site may process normal technical request data, such as IP addresses and access logs, to operate and secure its service. The hosting provider's policy applies to that processing.</p>
+    <h2>Changes</h2><p>If analytics, forms, or other integrations are introduced, this page should be updated before those features are published.</p>
+  </div></section>
+</BaseLayout>

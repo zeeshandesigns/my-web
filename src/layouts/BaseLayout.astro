@@ -4,14 +4,22 @@ import Footer from '../components/Footer.astro';
 import IntroBar from '../components/IntroBar.astro';
 import '../styles/global.css';
 import { profile } from '../data/profile';
-interface Props { title: string; description: string; image?: string; noindex?: boolean; }
-const { title, description, image, noindex = false } = Astro.props;
-// Do not index WIP or preview builds. Enable explicitly only at public launch.
+import { siteSettings } from '../data/site';
+interface Props { title: string; description: string; image?: string; noindex?: boolean; article?: boolean; }
+const { title, description, image, noindex = false, article = false } = Astro.props;
+// No indexing until the owner verifies the final portfolio and explicitly opts in.
 const indexingEnabled = import.meta.env.PUBLIC_ALLOW_INDEXING === 'true' && Astro.site?.hostname !== 'example.com';
 const shouldNoindex = noindex || !indexingEnabled;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://example.com');
 const fullTitle = title === profile.name ? `${profile.name} — Multidisciplinary Designer` : `${title} — ${profile.name}`;
-const ogImage = image ? new URL(image, canonical).href : undefined;
+const shareImage = new URL(image || siteSettings.socialImage, canonical).href;
+const schema = {
+  '@context': 'https://schema.org', '@type': 'Person',
+  name: profile.name, jobTitle: 'Multidisciplinary Designer',
+  url: new URL('/',canonical).href, homeLocation: {'@type':'Place', name: profile.city},
+  sameAs: [profile.linkedIn, siteSettings.github],
+  knowsAbout: ['UI/UX design','Graphic design','Social media design','Brand identity'],
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -19,19 +27,29 @@ const ogImage = image ? new URL(image, canonical).href : undefined;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#ffffff" />
+    <meta name="color-scheme" content="light" />
     <meta name="description" content={description} />
-    {shouldNoindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="author" content={profile.name} />
+    <meta name="robots" content={shouldNoindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large'} />
     <link rel="canonical" href={canonical.href} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title="Zeeshan Haider — Notes" href="/rss.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+    <meta property="og:image" content={shareImage} />
+    <meta property="og:image:alt" content={`Zeeshan Haider — ${title}`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g,'\\u003c')} />
     <title>{fullTitle}</title>
   </head>
   <body>
@@ -39,7 +57,7 @@ const ogImage = image ? new URL(image, canonical).href : undefined;
     <div class="site-wrap">
       <Header />
       <IntroBar />
-      <main id="main-content"><slot /></main>
+      <main id="main-content" tabindex="-1"><slot /></main>
       <Footer />
     </div>
     <script>import '../scripts/site';</script>

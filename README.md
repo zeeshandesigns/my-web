@@ -1,81 +1,95 @@
-# Zeeshan Haider — Personal Portfolio (Astro)
+# Zeeshan Haider — Personal Portfolio
 
-Astro source migration of the approved multi-page HTML prototype. **This is a new independent website**, not an iteration of the Zynk business website.
+A custom, multi-page, static personal portfolio and digital career profile. Built with **Astro 5 + TypeScript**, a clean white/blue visual system, and structured Markdown content. This website represents **Zeeshan Haider**; it is not a Zynk-branded website.
 
-## Install and start
+**Status:** Site implementation is ready for its owner's deployment. Real project screenshots, full case-study results, a personal portrait, and licensed GT Walsheim webfont files are still to be supplied. The domain must also be configured before public launch. The website intentionally uses visible mock visuals and is **not indexed by search engines by default**.
 
-Requires Node.js 20.3+ or 22+ and internet access to the npm registry for the initial install.
+## Run the project
+
+Requires Node.js 22 and npm:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open http://localhost:4321. Production build:
+Local development: http://localhost:4321.
 
 ```bash
-npm run build
-npm run preview
+npm run audit     # Structural/content validation (no dependencies required)
+npm run check     # Astro + TypeScript diagnostics
+npm run build     # Compile all static pages
+npm run smoke     # Check generated routes/assets/internal links after build
+npm run preview   # Local production preview
 ```
 
-Run `npm run audit` without installing packages to check that route templates, imports, project records and content structure are present.
+The `.github/workflows/validate.yml` pipeline automatically performs these checks on pushes and pull requests. The built `dist/` website is uploaded as a downloadable GitHub Actions artifact (retained for 14 days), not auto-deployed.
 
-The source is designed for **Astro 5** content collections. Use `npm run check` to run Astro/TypeScript diagnostics (requires `@astrojs/check`).
+## Site pages
 
-**Build verification in the handoff environment:** npm registry resolution failed (`EAI_AGAIN`), therefore dependency installation and `astro build` could not be executed here. Static structural checks and link audits are included separately. Do not claim the project has passed a real Astro build until running the commands above in an online environment.
-
-## Routes
-
-| Path | Purpose |
+| Route | Page |
 |---|---|
-| `/` | Approved homepage |
-| `/work/` | Project gallery with category filters |
-| `/work/[slug]/` | Individual project case studies, generated from Markdown |
-| `/about/` | Professional story plus space for personal information |
-| `/resume/` | Expanded digital CV |
-| `/notes/` | Design articles, insights, front-end learning updates |
-| `/notes/learning-log/` | Filtered beginner learning journal |
-| `/notes/[slug]/` | Article pages generated from Markdown |
-| `/contact/` | Contact via email, LinkedIn and resume |
+| `/` | Homepage with four featured work placements (three selected, one reserved) |
+| `/work/` | All work, client-work discipline filters, search |
+| `/work/<slug>/` | Individual editable case-study pages |
+| `/about/` | Personal background, approach and university activities |
+| `/resume/` | Digital CV with print/save-to-PDF button |
+| `/notes/` | Articles, design insights and learning entries with filters/search |
+| `/notes/learning-log/` | Front-end learning journal |
+| `/notes/<slug>/` | Individual readable articles |
+| `/contact/` | Email, LinkedIn, GitHub and digital resume |
+| `/privacy/` | Clear static-site privacy information |
+| `/404.html` | Custom error page |
+| `/rss.xml` | Syndicated Notes feed |
+| `/sitemap.xml` and `/robots.txt` | Generated crawlers' files |
 
-## Update content
+## Where to change things
 
-- Edit `src/data/profile.ts` for name, email, location, and LinkedIn.
-- Edit text/markup in `src/components/home/` for the homepage sections.
-- Add/edit a project in `src/content/projects/<slug>.md` (eight CV-based projects included). Project title, description, category, tags, role, context, deliverables and visual preview are frontmatter fields. `cover` can be an image path under `/public/images/`, such as `/images/etg-cover.webp`.
-- Projects appear automatically on `/work/`, and each has a `/work/<slug>/` page. Featured homepage projects are selected by slug in `src/components/home/FeaturedWork.astro`. The fourth featured social media slot is intentionally reserved until a real project is selected.
-- Add a real note in `src/content/notes/<slug>.md`. Start from `examples/note-template.md`, provide a real publication date, and set `draft: false`. Notes automatically appear on `/notes/`, and `category: learning` entries also appear on `/notes/learning-log/`.
-- Pages use `BaseLayout.astro` for header, footer, metadata and site structure; reusable project components live under `src/components/`.
-- Design tokens and site styling: `src/styles/global.css`.
-- The menu and work filters are implemented in `src/scripts/site.ts`.
+- **Personal identity and contact**: `src/data/profile.ts`; site/social settings: `src/data/site.ts`.
+- **Homepage**: `src/components/home/`; reusable page layout: `src/layouts/BaseLayout.astro`.
+- **CV details**: `src/pages/resume.astro`. Role descriptions are based on the CV provided in this chat, not on invented metrics. Print-ready styling lives in `src/styles/global.css`.
+- **About/personality**: `src/pages/about.astro`. A few known university activities are included; replace any "photo to be added" caption with the approved actual portrait.
+- **Projects**: `src/content/projects/*.md`; see `examples/project-template.md` and frontmatter schema `src/content.config.ts`. New approved projects automatically get their own page and appear in Work. Add verified screenshots using `cover` and optional `gallery` items, with meaningful image descriptions; add `projectUrl`, `repositoryUrl`, `process`, or `outcome` if applicable.
+- **Homepage featured four projects**: `src/components/home/FeaturedWork.astro`. Currently 2 UI, 1 social, and 1 clearly reserved social slot. Replace `ReservedProject` only once the fourth real client campaign is selected and approved.
+- **Notes**: `src/content/notes/*.md`; see `examples/note-template.md`. Three starter notes are included (two evergreen design pieces and one introductory learning note), drafted for the website and **subject to your editorial review**. Future updates should be written from actual experience. Set `draft: true` to hide an entry.
+- **Design tokens and style**: `src/styles/global.css`; `src/styles/font-installation.md` explains how to install GT Walsheim legally once you supply your files.
+- **Interactions**: `src/scripts/site.ts` implements accessible mobile menu, Work/Notes filters and search, Copy Email, and Print Resume. Navigation and content remain useful without JavaScript.
 
-## Factual accuracy and launch checklist
+## Adding visuals
 
-Source content is the user's supplied two-page CV, *Zeeshan Designer CV.pdf*. It contains professional experience, project scope and education. The website **does not invent** client results, screenshots or blog posts.
+Place your approved images under `public/images/`, preferably compressed WebP/AVIF where appropriate. Reference images by absolute site paths such as `/images/elite-top-guards-cover.webp`. Project and gallery images should have descriptive alt text. Keep screenshot copy readable and do not upload private information, source design files that cannot be shared, or unverified performance statistics. See each `src/content/projects/*.md` file for the existing factual case-study text.
 
-Before publishing:
+No work samples or client-results graphics have been invented. The current abstract previews are visibly marked as illustrative placeholders; replace them before job applications or launching the site publicly.
 
-1. Confirm degree completion status. The CV calls Zeeshan a graduate but dates BBIT to December 2026.
-2. Replace the portrait and all project preview placeholders with approved real images.
-3. Confirm the second featured social campaign and update `FeaturedWork.astro` accordingly.
-4. Confirm that client identities, work samples and result metrics may be published.
-5. Add actual articles/learning entries; the publishing system has an honest empty state.
-6. Add a reviewed, up-to-date PDF resume only after deciding what contact information should be public.
-7. License **GT Walsheim** for web usage; it is not included. Montserrat loads through Google Fonts.
-8. Configure `PUBLIC_SITE_URL` (or change `site` in `astro.config.mjs`) to your domain before deploying. The default is `https://example.com` for local development only. `/sitemap.xml` and `/robots.txt` are generated automatically and will use the configured `site` URL.
-9. Run `npm install`, `npm run check`, and `npm run build`, then test keyboard/mobile navigation and real links.
-10. Do not mark the website indexable until after final approval. Set `PUBLIC_ALLOW_INDEXING=true` only when public content is verified.
+## Fonts
 
-## Hosting
+Montserrat is currently loaded from Google Fonts for body text. GT Walsheim is a licensed typeface and is not distributed in this repository. Current headings use fallback type; when you have your licensed WOFF2 files, follow `src/styles/font-installation.md`.
 
-Astro builds static pages to `dist/`. On Vercel select **Astro** as the framework preset, build command `npm run build`, output `dist` (usually detected automatically).
+## Owner deployment (Vercel or another static host)
 
-**Safe-by-default indexing:** the code emits `noindex` and `Disallow: /` until both `PUBLIC_SITE_URL` points to the actual HTTPS domain and `PUBLIC_ALLOW_INDEXING=true`. Leave indexing disabled for WIP/preview sites. Before launch run `npm run launch:check` in an environment where both variables are set. The check validates configuration, not the accuracy or authorization of public content.
+Set framework preset to **Astro**, build command to `npm run build`, and publish directory to `dist` (often detected automatically).
 
-**GitHub:** this project belongs in a brand-new repository, not `ZynkWeb`. After creating an empty repository, add the project files at the root and push to `main`. `.github/workflows/validate.yml` will automatically run the structural audit, Astro checks and production build on pushes and pull requests. The initial workflow uses `npm install` because no lockfile could be generated in this offline handoff; run `npm install` in an online environment and commit its generated `package-lock.json`, then switch the workflow install command to `npm ci` for reproducible builds.
+For the target **public** domain, add:
 
-**Before deployment:** ensure a green GitHub Actions validation run, verify the actual built site visually, and add verified real assets and the approved PDF resume. Do not publish the WIP site as a finished job-search portfolio.
+```bash
+PUBLIC_SITE_URL=https://your-real-domain.example
+PUBLIC_ALLOW_INDEXING=false
+```
 
-## Privacy
+`PUBLIC_SITE_URL` must be the final HTTPS domain, not `example.com`, before public launch. Keep `PUBLIC_ALLOW_INDEXING=false` on previews or while work samples are incomplete. This creates robots noindex and disallow policies by default.
 
-No analytics, database, contact form, tracking, or booking system. Public contact is via email and LinkedIn already present in the supplied CV. Phone number is deliberately omitted. No memory persistence is required for project work.
+**After checking real client content, links, copyright permissions, personal details, deployment, and QA**, change `PUBLIC_ALLOW_INDEXING=true` and rebuild. `npm run launch:check` checks indexing/domain configuration; it does not replace human content approvals.
+
+## Final owner review
+
+1. Review any career details on the resume, notably **BBIT graduation status**. The supplied CV calls Zeeshan a graduate but dates the BBIT period through December 2026; the site avoids claiming that the degree is already conferred.
+2. Upload the actual portrait and project previews; replace reserved homepage social placement and optional galleries.
+3. Confirm project permissions, employer and client naming, outcome data, real live demo links, and accessibility of images.
+4. Review the three assistant-drafted starter Notes in your voice and add real learning entries over time.
+5. Install GT Walsheim with the appropriate license and check fonts across pages.
+6. Verify your email, LinkedIn, and GitHub account links and confirm what contact information should be public.
+7. Test mobile keyboard navigation, project filters, and printer/PDF output in the deployed environment.
+8. Confirm domain, favicon, social image, robots policy, canonical URLs, and the RSS/sitemap endpoints.
+9. Update `src/pages/privacy.astro` if you enable forms, analytics, or third-party embeds later.
+
+This repository contains no Supabase connection, admin credentials, booking system, payment processing, or user-data collection backend.

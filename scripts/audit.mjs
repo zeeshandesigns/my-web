@@ -8,7 +8,7 @@ const check = (condition, message) => { if (!condition) failures.push(message); 
 const exists = file => fs.existsSync(path.join(base,file));
 const read = file => fs.readFileSync(path.join(base,file), 'utf8');
 const content = folder => fs.readdirSync(path.join(base,folder)).filter(n=>n.endsWith('.md'));
-const pages = ['src/pages/index.astro','src/pages/work/index.astro','src/pages/work/[slug].astro','src/pages/about.astro','src/pages/resume.astro','src/pages/notes/index.astro','src/pages/notes/learning-log/index.astro','src/pages/notes/[slug].astro','src/pages/contact.astro'];
+const pages = ['src/pages/index.astro','src/pages/work/index.astro','src/pages/work/[slug].astro','src/pages/about.astro','src/pages/resume.astro','src/pages/notes/index.astro','src/pages/notes/learning-log/index.astro','src/pages/notes/[slug].astro','src/pages/contact.astro','src/pages/privacy.astro','src/pages/404.astro'];
 pages.forEach(file => check(exists(file), `Missing page: ${file}`));
 const projectFiles = content('src/content/projects');
 const slugs = new Set(projectFiles.map(file=>file.slice(0,-3)));
@@ -26,7 +26,8 @@ for(const slug of ['elite-top-guards','startex-marketing','pulse-real-estate']) 
 check(read('src/pages/index.astro').includes('<ReservedProject')===false, 'Home reserved slot should belong to FeaturedWork component');
 check(featured.includes('<ReservedProject'), 'Featured Work needs second social media placeholder');
 check(exists('src/content.config.ts'), 'Missing collections schema');
-check(exists('src/pages/sitemap.xml.ts') && exists('src/pages/robots.txt.ts'),'Missing SEO endpoints');
+check(exists('src/pages/sitemap.xml.ts') && exists('src/pages/robots.txt.ts') && exists('src/pages/rss.xml.ts'),'Missing SEO endpoints');
+check(exists('public/og-cover.png'), 'Missing site social share image');
 check(!exists('public/resume.pdf'), 'Do not publish an unreviewed CV');
 const allAstro = [];
 const walk = dir => {for (const item of fs.readdirSync(dir, {withFileTypes:true})) {const p=path.join(dir,item.name); if(item.isDirectory())walk(p);else if(p.endsWith('.astro'))allAstro.push(p);}};

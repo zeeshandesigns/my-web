@@ -1,42 +1,96 @@
-// Progressive enhancements: mobile menu and portfolio category filters.
+// All functionality is progressive enhancement: every destination still works without JS.
 const toggle = document.querySelector<HTMLButtonElement>('#menuToggle');
 const mobileMenu = document.querySelector<HTMLElement>('#mobileMenu');
+const menuSymbol = toggle?.querySelector<HTMLElement>('[aria-hidden]');
 
-function closeMenu() {
+function setMenu(open: boolean) {
   if (!toggle || !mobileMenu) return;
-  mobileMenu.classList.remove('open');
-  toggle.setAttribute('aria-expanded', 'false');
-  toggle.textContent = '☰';
+  mobileMenu.classList.toggle('open', open);
+  mobileMenu.inert = !open;
+  toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+  if (menuSymbol) menuSymbol.textContent = open ? '✕' : '☰';
 }
 
-toggle?.addEventListener('click', () => {
-  if (!mobileMenu) return;
-  const isOpen = mobileMenu.classList.toggle('open');
-  toggle.setAttribute('aria-expanded', String(isOpen));
-  toggle.textContent = isOpen ? '✕' : '☰';
+toggle?.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setMenu(false)));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') {
+    setMenu(false);
+    toggle.focus();
+  }
 });
-mobileMenu?.querySelectorAll<HTMLAnchorElement>('a').forEach(link => link.addEventListener('click', closeMenu));
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeMenu();
+document.addEventListener('pointerdown', event => {
+  if (toggle?.getAttribute('aria-expanded') === 'true' && event.target instanceof Node && !toggle.contains(event.target) && !mobileMenu?.contains(event.target)) setMenu(false);
 });
+window.matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
 
 const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
 const cards = document.querySelectorAll<HTMLElement>('[data-type]');
 const counter = document.querySelector<HTMLElement>('#filterCount');
+const search = document.querySelector<HTMLInputElement>('#projectSearch');
+let category = 'all';
+function filterProjects() {
+  const query = (search?.value || '').trim().toLocaleLowerCase();
+  let count = 0;
+  let reserved = false;
+  cards.forEach(card => {
+    const typeMatch = category === 'all' || (card.dataset.type ?? '').split(' ').includes(category);
+    const searchMatch = !query || (card.dataset.search || '').toLocaleLowerCase().includes(query);
+    const visible = typeMatch && searchMatch;
+    card.hidden = !visible;
+    if (visible && card.dataset.placeholder === 'true') reserved = true;
+    else if (visible) count++;
+  });
+  if (counter) counter.textContent = `${count} project${count === 1 ? '' : 's'} displayed${reserved ? ' · 1 reserved slot' : ''}`;
+}
 filters.forEach(button => button.addEventListener('click', () => {
+  category = button.dataset.filter ?? 'all';
   filters.forEach(other => {
     const selected = other === button;
     other.classList.toggle('active', selected);
     other.setAttribute('aria-pressed', String(selected));
   });
-  const selection = button.dataset.filter ?? 'all';
-  let visibleCount = 0;
-  let placeholderVisible = false;
-  cards.forEach(card => {
-    const matches = selection === 'all' || (card.dataset.type ?? '').split(' ').includes(selection);
-    card.hidden = !matches;
-    if (matches && card.dataset.placeholder === 'true') placeholderVisible = true;
-    else if (matches) visibleCount++;
-  });
-  if (counter) counter.textContent = `${visibleCount} project${visibleCount === 1 ? '' : 's'} displayed${placeholderVisible ? ' · 1 reserved slot' : ''}`;
+  filterProjects();
 }));
+search?.addEventListener('input', filterProjects);
+
+const noteFilters = document.querySelectorAll<HTMLButtonElement>('[data-note-filter]');
+const noteCards = document.querySelectorAll<HTMLElement>('[data-note-category]');
+const noteSearch = document.querySelector<HTMLInputElement>('#noteSearch');
+const noteCount = document.querySelector<HTMLElement>('#noteFilterCount');
+let noteCategory = 'all';
+function filterNotes() {
+  const query = (noteSearch?.value || '').trim().toLocaleLowerCase();
+  let count = 0;
+  noteCards.forEach(card => {
+    const matches = (noteCategory === 'all' || card.dataset.noteCategory === noteCategory) && (!query || (card.dataset.search || '').toLocaleLowerCase().includes(query));
+    card.hidden = !matches;
+    if (matches) count++;
+  });
+  if (noteCount) noteCount.textContent = `${count} note${count === 1 ? '' : 's'} displayed`;
+}
+noteFilters.forEach(button => button.addEventListener('click', () => {
+  noteCategory = button.dataset.noteFilter || 'all';
+  noteFilters.forEach(other => {
+    other.setAttribute('aria-pressed', String(other === button));
+    other.classList.toggle('active', other === button);
+  });
+  filterNotes();
+}));
+noteSearch?.addEventListener('input', filterNotes);
+
+const copyButton = document.querySelector<HTMLButtonElement>('#copyEmail');
+const copyFeedback = document.querySelector<HTMLElement>('#copyFeedback');
+copyButton?.addEventListener('click', async () => {
+  const address = copyButton.dataset.email;
+  if (!address) return;
+  try {
+    await navigator.clipboard.writeText(address);
+    if (copyFeedback) copyFeedback.textContent = 'Email address copied.';
+  } catch {
+    if (copyFeedback) copyFeedback.textContent = 'Select the address in the Email link to copy it.';
+  }
+});
+
+document.querySelector<HTMLButtonElement>('#printResume')?.addEventListener('click', () => window.print());
