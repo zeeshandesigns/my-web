@@ -1,0 +1,48 @@
+name: Import Client Galleries
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - portfolio-gallery-bundle.zip
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-gallery-import
+  cancel-in-progress: false
+
+jobs:
+  import-galleries:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Import and verify gallery images
+        run: python3 scripts/import_client_galleries.py
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Audit project structure
+        run: npm run audit
+      - name: Check Astro and TypeScript
+        run: npm run check
+      - name: Build portfolio
+        run: npm run build
+      - name: Verify routes and links
+        run: npm run smoke
+      - name: Publish validated gallery assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- src/content/projects/webcraft-consulting.md src/content/projects/zoya-beauty-hub.md
+          git add -- public/images/social/webcraft-consulting public/images/social/zoya-beauty-hub
+          git rm -- portfolio-gallery-bundle.zip
+          git commit -m "Publish WebCraft and Zoya social media galleries"
+          git push origin HEAD:main
