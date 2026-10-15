@@ -1,3 +1,167 @@
-<section class="section resume-home" id="experience"><div class="container"><div class="resume-section-head"><div><span class="eyebrow">04 / PROFESSIONAL EXPERIENCE</span><h2 class="resume-heading">Where I’ve Worked.</h2></div><p>Roles are distinguished as full-time, contract, and volunteer engagements.</p></div><article class="experience-row"><div class="experience-date">Jul 2026 — Present</div><div class="experience-body"><h3>WebBridge Consulting</h3><div class="experience-role">Graphic Designer · Full-time</div><ul><li>Sole designer across 12+ US-based client accounts in beauty, hospitality and retail.</li><li>Produced social media creatives, Meta ad visuals and brand graphics; produced 8–10 assets per shift.</li><li>Created identity, social and campaign design for WebBridge Global Institute and WebCraft Consulting.</li></ul></div></article><article class="experience-row"><div class="experience-date">Feb 2026 — Jun 2026</div><div class="experience-body"><h3>Tricon Marketing</h3><div class="experience-role">Graphic Designer · Full-time</div><ul><li>Designed the active visual template system for a Pakistani digital news platform, including layout, grid and typography.</li><li>Produced social media creatives for TurnOver Marketing across multiple campaigns.</li></ul></div></article><article class="experience-row"><div class="experience-date">Sep 2025; Feb 2026</div><div class="experience-body"><h3>Aris Universal Solutions</h3><div class="experience-role">UI/UX &amp; Graphic Designer · Contract</div><ul><li>Delivered four projects for security-industry clients in the UK.</li><li>Designed Elite Top Guards’ full identity and website interface on a two-week timeline.</li><li>Created website and admin-panel interfaces, certification graphics and business collateral for additional clients.</li></ul></div></article><article class="experience-row"><div class="experience-date">Dec 2025 — Jan 2026</div><div class="experience-body"><h3>Technology Brainz</h3><div class="experience-role">UI Designer · Contract</div><ul><li>Contributed application screens for a banking mobile app alongside a US-based team.</li><li>Completed the CricSea cricket mobile app interface as a design assessment project.</li></ul></div></article><article class="experience-row"><div class="experience-date">Aug 2024 — May 2025</div><div class="experience-body"><h3>Neksogix</h3><div class="experience-role">UI/UX &amp; Graphic Designer · Full-time</div><ul><li>Designed the company’s logo, brand system, stationery and identity guidelines.</li><li>Designed interfaces for AI-powered client projects and two websites.</li><li>Created social media creatives, case studies and marketing visuals.</li></ul></div></article><article class="experience-row"><div class="experience-date">Jan 2025 — Sep 2025</div><div class="experience-body"><h3>University of the Punjab — DSA</h3><div class="experience-role">Volunteer Designer &amp; Photographer</div><ul><li>Designed branding and collateral for IBIT’s departmental convocation independently.</li><li>Created graphics, banners and social posts for official events.</li><li>Photographed formal university occasions.</li></ul></div></article></div></section>
-<section class="section resume-home muted-bg" id="education"><div class="container"><div class="resume-section-head"><div><span class="eyebrow">05 / EDUCATION</span><h2 class="resume-heading">Education &amp; University Work.</h2></div></div><article class="education-box"><div class="experience-date">2022 — 2026</div><div><strong>University of the Punjab</strong><div class="experience-role">Bachelor of Business &amp; Information Technology (BBIT)</div><p>During my BBIT studies, I contributed UI design and front-end work to NutriSense AI, a four-person final-year project. My university experience also included convocation design, volunteering, an IBIT website concept and student leadership.</p></div></article><article class="education-box"><div class="experience-date">2019 — 2021</div><div><strong>BISE Lahore</strong><div class="experience-role">F.Sc Pre-Engineering</div><p>Mathematics, Physics and Chemistry. The source CV reports 92%.</p></div></article></div></section>
-<section class="section resume-home" id="skills"><div class="container"><div class="section-head"><div><span class="eyebrow">06 / TOOLS &amp; CAPABILITIES</span><h2 class="section-title">A Multidisciplinary Toolkit.</h2></div><p class="section-description">A practical toolkit spanning creative production, interface design and the foundations I’m developing.</p></div><div style="margin:32px 0 45px"><h3 class="small-title" style="font-size:26px">Design Tools</h3><p class="tiny-note">Core design software.</p><div class="pill-grid"><span class="skill-pill">Figma</span><span class="skill-pill">Adobe Illustrator</span><span class="skill-pill">Adobe Photoshop</span><span class="skill-pill">Canva</span><span class="skill-pill">CorelDRAW</span></div></div><div style="margin:32px 0 45px"><h3 class="small-title" style="font-size:26px">Design Work</h3><p class="tiny-note">Creative and interface work across client and university projects.</p><div class="pill-grid"><span class="skill-pill">UI/UX design</span><span class="skill-pill">Social media posts</span><span class="skill-pill">Brand identities</span><span class="skill-pill">Ad creatives</span><span class="skill-pill">Websites &amp; dashboards</span><span class="skill-pill">Documentation design</span><span class="skill-pill">Event photography</span></div></div><div style="margin:32px 0 45px"><h3 class="small-title" style="font-size:26px">Development Foundation</h3><p class="tiny-note">Foundational skills that I’m continuing to develop.</p><div class="pill-grid"><span class="skill-pill">HTML</span><span class="skill-pill">CSS</span><span class="skill-pill">C++</span><span class="skill-pill">Databases</span><span class="skill-pill">WordPress</span></div></div><div class="progress-frame"><span class="eyebrow">CURRENT DIRECTION</span><h3>Growing from Design into Front-End Development.</h3><p>I’m a beginner in front-end development. My current foundation includes HTML and CSS, with UI and front-end contributions to NutriSense AI, a university team project using React and Vite.</p><div class="foot-links"><a class="btn btn-ghost" href="/work/nutrisense-ai/">View NutriSense AI ↗</a></div></div></div></section>
+---
+import ToolIcon from '../ToolIcon.astro';
+
+const roles = [
+  {
+    initials: 'WB', company: 'WebBridge Consulting', period: 'Jul 2026 — Present', role: 'Graphic Designer', type: 'Full-Time',
+    work: [
+      'Sole designer across 12+ US-based client accounts in beauty, hospitality and retail.',
+      'Produced social media creatives, Meta ad visuals and brand graphics, including 8–10 assets per shift.',
+      'Created identity, social and campaign designs for WebBridge Global Institute and WebCraft Consulting.'
+    ],
+  },
+  {
+    initials: 'TM', company: 'Tricon Marketing', period: 'Feb 2026 — Jun 2026', role: 'Graphic Designer', type: 'Full-Time',
+    work: [
+      'Designed the visual template system for a Pakistani digital news platform, including layout, grid and typography.',
+      'Produced social media creatives for TurnOver Marketing across multiple campaigns.'
+    ],
+  },
+  {
+    initials: 'AU', company: 'Aris Universal Solutions', period: 'Sep 2025; Feb 2026', role: 'UI/UX & Graphic Designer', type: 'Contract',
+    work: [
+      'Delivered four design projects for security-industry clients in the UK.',
+      'Designed Elite Top Guards’ identity and website interface on a two-week timeline.',
+      'Created website and admin-panel interfaces, certification graphics and business collateral.'
+    ],
+  },
+  {
+    initials: 'TB', company: 'Technology Brainz', period: 'Dec 2025 — Jan 2026', role: 'UI Designer', type: 'Contract',
+    work: [
+      'Contributed application screens for a banking mobile app with a US-based team.',
+      'Completed the CricSea cricket mobile app interface as a design assessment.'
+    ],
+  },
+  {
+    initials: 'NK', company: 'Neksogix', period: 'Aug 2024 — May 2025', role: 'UI/UX & Graphic Designer', type: 'Full-Time',
+    work: [
+      'Designed the company’s logo, brand system, stationery and identity guidelines.',
+      'Designed interfaces for AI-powered client projects and two websites.',
+      'Created social media creatives, case studies and marketing visuals.'
+    ],
+  },
+  {
+    initials: 'PU', company: 'University of the Punjab — DSA', period: 'Jan 2025 — Sep 2025', role: 'Volunteer Designer & Photographer', type: 'Volunteer',
+    work: [
+      'Independently designed branding and collateral for IBIT’s departmental convocation.',
+      'Created graphics, banners and social posts for official university events.',
+      'Photographed formal university occasions.'
+    ],
+  },
+];
+
+const designTools = [
+  { name: 'Figma', icon: 'figma', category: 'Interface Design' },
+  { name: 'Adobe Illustrator', icon: 'illustrator', category: 'Vector & Identity' },
+  { name: 'Adobe Photoshop', icon: 'photoshop', category: 'Image & Creative' },
+  { name: 'Canva', icon: 'canva', category: 'Creative Production' },
+  { name: 'CorelDRAW', icon: 'coreldraw', category: 'Vector Graphics' },
+] as const;
+
+const developmentTools = [
+  { name: 'HTML', icon: 'html' },
+  { name: 'CSS', icon: 'css' },
+  { name: 'C++', icon: 'cpp' },
+  { name: 'Databases', icon: 'database' },
+  { name: 'WordPress', icon: 'wordpress' },
+] as const;
+
+const capabilities = [
+  'UI/UX Design', 'Social Media Design', 'Brand Identity',
+  'Meta Ad Creatives', 'Websites & Dashboards',
+  'Documentation Design', 'Event Photography'
+];
+---
+<section class="section career-studio" id="experience" aria-labelledby="experience-title">
+  <div class="container career-studio-grid">
+    <div class="career-intro">
+      <span class="eyebrow">04 / THE JOURNEY</span>
+      <h2 class="section-title" id="experience-title">Experience Built on <span class="accent-underline">Real Work.</span></h2>
+      <p>From creating brands and digital campaigns to crafting interfaces, each opportunity has shaped how I think about design.</p>
+      <div class="career-side-note">
+        <span class="career-side-mark" aria-hidden="true">06</span>
+        <div><strong>Professional &amp; Volunteer Roles</strong><span>Across design, digital products and visual communication.</span></div>
+      </div>
+    </div>
+    <div class="career-timeline">
+      {roles.map((item, index) => (
+        <article class="career-card">
+          <div class="career-card-top">
+            <span class="career-marker" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+            <span class="career-period">{item.period}</span>
+            <span class="career-type">{item.type}</span>
+          </div>
+          <div class="career-card-main">
+            <span class="career-company-avatar" aria-hidden="true">{item.initials}</span>
+            <div><h3>{item.company}</h3><p class="career-job-title">{item.role}</p></div>
+          </div>
+          <ul>{item.work.map(detail => <li>{detail}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="section education-studio" id="education" aria-labelledby="education-title">
+  <div class="container">
+    <div class="section-head">
+      <div><span class="eyebrow">05 / ACADEMIC FOUNDATION</span><h2 class="section-title" id="education-title">Education &amp; <span class="accent-underline">Perspective.</span></h2></div>
+      <p class="section-description">A background in business and technology informs the way I approach both visual design and digital products.</p>
+    </div>
+    <div class="education-studio-grid">
+      <article class="education-feature">
+        <div class="education-feature-top"><span>01 / UNIVERSITY</span><span class="education-years">2022 — 2026</span></div>
+        <span class="education-symbol" aria-hidden="true">PU.</span>
+        <div class="education-feature-copy">
+          <span class="award-label"><svg viewBox="0 0 20 20" width="16" height="16" aria-hidden="true"><path d="m4 10 4 4 8-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Degree Awarded</span>
+          <h3>Bachelor of Business &amp; Information Technology (BBIT)</h3>
+          <p class="education-place">University of the Punjab</p>
+          <p>Contributed UI design and front-end work to NutriSense AI, a four-person final-year project. My university experience also included convocation design, volunteering, an IBIT website concept and student leadership.</p>
+        </div>
+      </article>
+      <article class="education-secondary">
+        <div class="education-secondary-head"><span>02 / COLLEGE</span><span class="education-years">2019 — 2021</span></div>
+        <div class="education-bookmark" aria-hidden="true"><svg viewBox="0 0 32 32" width="31" height="31"><path d="M5 9 16 4l11 5-11 5L5 9Zm5 5v8c4 4 8 4 12 0v-8M27 10v11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div><h3>F.Sc Pre-Engineering</h3><p class="education-place">BISE Lahore</p><p>Mathematics, Physics and Chemistry.</p></div>
+        <span class="education-secondary-footer">Science &amp; Technical Foundation <span aria-hidden="true">↗</span></span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section toolkit-studio" id="skills" aria-labelledby="tools-title">
+  <div class="container">
+    <div class="toolkit-studio-heading">
+      <div><span class="eyebrow">06 / CREATIVE TOOLKIT</span><h2 class="section-title" id="tools-title">The Tools Behind <span class="accent-underline">the Work.</span></h2></div>
+      <p>Different tools for different problems. Here’s the software I use for visual work, plus the development fundamentals I’m growing.</p>
+    </div>
+    <div class="toolkit-primary">
+      <div class="toolkit-label"><span>01 — DESIGN SOFTWARE</span><span>Creative &amp; Interface Tools</span></div>
+      <div class="tool-grid">
+        {designTools.map((tool, i) => (
+          <div class="tool-tile" style={`--tile-index: ${i}`}>
+            <ToolIcon name={tool.icon} />
+            <h3>{tool.name}</h3>
+            <p>{tool.category}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+    <div class="toolkit-lower">
+      <div class="toolkit-capability-panel">
+        <div class="toolkit-label"><span>02 — WHAT I CREATE</span><span>Design Capabilities</span></div>
+        <div class="capability-grid">{capabilities.map((capability, i) => <div class="capability-item"><span class="capability-spark" aria-hidden="true">{String(i+1).padStart(2, '0')}</span>{capability}<span class="capability-arrow" aria-hidden="true">↗</span></div>)}</div>
+      </div>
+      <div class="toolkit-code-panel">
+        <div class="toolkit-label"><span>03 — DEVELOPMENT</span><span>Learning Foundation</span></div>
+        <div class="dev-icon-grid">{developmentTools.map(tool => <div class="dev-icon-tile"><ToolIcon name={tool.icon}/><span>{tool.name}</span></div>)}</div>
+        <div class="toolkit-code-note">
+          <span class="toolkit-code-line" aria-hidden="true">01 / KEEP BUILDING</span>
+          <h3>Design-Led. Learning to Build.</h3>
+          <p>I'm at the beginning of front-end development, building on HTML and CSS while applying interface skills to practical work such as NutriSense AI (React and Vite).</p>
+          <a class="text-link" href="/work/nutrisense-ai/">Explore NutriSense AI <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

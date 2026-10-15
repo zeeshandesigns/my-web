@@ -1,0 +1,25 @@
+---
+type ToolName = 'figma' | 'illustrator' | 'photoshop' | 'canva' | 'coreldraw' | 'html' | 'css' | 'cpp' | 'database' | 'wordpress';
+interface Props { name: ToolName; }
+const { name } = Astro.props;
+---
+<span class:list={['tool-icon', `tool-icon--${name}`]} aria-hidden="true">
+  <svg viewBox="0 0 64 64" width="44" height="44" focusable="false">
+    {name === 'figma' && <g>
+      <rect x="16" y="6" width="16" height="17" rx="8" fill="#F24E1E"/>
+      <rect x="32" y="6" width="16" height="17" rx="8" fill="#FF7262"/>
+      <rect x="16" y="23" width="16" height="17" rx="8" fill="#A259FF"/>
+      <circle cx="40" cy="31.5" r="8" fill="#1ABCFE"/>
+      <rect x="16" y="40" width="16" height="17" rx="8" fill="#0ACF83"/>
+    </g>}
+    {name === 'illustrator' && <g><rect x="5" y="5" width="54" height="54" rx="11" fill="#310000"/><rect x="7" y="7" width="50" height="50" rx="9" fill="none" stroke="#FF9A00" stroke-width="2"/><text x="13" y="44" font-size="32" font-weight="700" font-family="Arial,sans-serif" fill="#FF9A00">Ai</text></g>}
+    {name === 'photoshop' && <g><rect x="5" y="5" width="54" height="54" rx="11" fill="#001E36"/><rect x="7" y="7" width="50" height="50" rx="9" fill="none" stroke="#31A8FF" stroke-width="2"/><text x="9" y="43" font-size="28" font-weight="700" font-family="Arial,sans-serif" fill="#31A8FF">Ps</text></g>}
+    {name === 'canva' && <g><circle cx="32" cy="32" r="28" fill="#20C4CC"/><circle cx="32" cy="32" r="24" fill="#7357DD" opacity=".4"/><text x="16" y="46" font-size="40" font-style="italic" font-family="Georgia,serif" fill="#fff">C</text></g>}
+    {name === 'coreldraw' && <g fill="none" stroke="#199B51" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M32 8c-12 0-21 8-21 19 0 8 7 15 21 22 14-7 21-14 21-22C53 16 44 8 32 8Z"/><path d="M11 27h42M32 8c-7 8-11 15-11 26 0 6 5 13 11 15M32 8c7 8 11 15 11 26 0 6-5 13-11 15M26 55h12M32 49v6"/></g>}
+    {name === 'html' && <g><path d="M11 6h42l-4 45-17 7-17-7L11 6Z" fill="#E44D26"/><path d="M32 11h16l-3.1 36L32 52Z" fill="#F16529"/><path d="m19 19 1 6h23l-.5 7H21l1.5 15 9.5 3 10-3 1.5-16" fill="none" stroke="#fff" stroke-width="3.5"/><text x="25" y="43" fill="#fff" font-size="10" font-weight="900">5</text></g>}
+    {name === 'css' && <g><path d="M11 6h42l-4 45-17 7-17-7L11 6Z" fill="#1572B6"/><path d="M32 11h16l-3.1 36L32 52Z" fill="#33A9DC"/><path d="M20 19h25l-1 7H21l1 7h20l-1.1 12L32 49l-9-4" fill="none" stroke="#fff" stroke-width="3.5"/><text x="27" y="43" fill="#fff" font-size="10" font-weight="900">3</text></g>}
+    {name === 'cpp' && <g><path d="M32 4 56 18v28L32 60 8 46V18L32 4Z" fill="#2357A8"/><text x="11" y="39" font-family="Arial,sans-serif" font-size="21" font-weight="700" fill="#fff">C++</text></g>}
+    {name === 'database' && <g fill="none" stroke="#4C6BE6" stroke-width="3" stroke-linecap="round"><ellipse cx="32" cy="14" rx="21" ry="9"/><path d="M11 14v35c0 5 9 9 21 9s21-4 21-9V14M11 32c0 5 9 9 21 9s21-4 21-9"/></g>}
+    {name === 'wordpress' && <g><circle cx="32" cy="32" r="27" fill="#21759B"/><circle cx="32" cy="32" r="21" fill="none" stroke="#fff" stroke-width="1.5"/><text x="12" y="46" font-size="38" font-family="Georgia,serif" font-weight="700" fill="#fff">W</text></g>}
+  </svg>
+</span>

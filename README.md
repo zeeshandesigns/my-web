@@ -1,6 +1,6 @@
 # Zeeshan Haider — Personal Portfolio
 
-A custom, multi-page, static personal portfolio with professional experience, education and capabilities on the homepage. Built with **Astro 5 + TypeScript**, a clean white/blue visual system, and structured Markdown content. This website represents **Zeeshan Haider**; it is not a Zynk-branded website.
+A custom, multi-page, static personal portfolio with an editorial visual system and professional experience, an awarded degree, education and an icon-based toolkit on the homepage. Built with **Astro 5 + TypeScript**, a clean white/blue visual system, and structured Markdown content. This website represents **Zeeshan Haider**; it is not a Zynk-branded website.
 
 **Status:** Site implementation is ready for its owner's deployment. Real project screenshots, full case-study results, a personal portrait, and licensed GT Walsheim webfont files are still to be supplied. The domain must also be configured before public launch. The website intentionally uses visible mock visuals and is **not indexed by search engines by default**.
 
@@ -76,13 +76,13 @@ PUBLIC_ALLOW_INDEXING=false
 
 ## Final owner review
 
-1. Review any career details on the homepage, notably **BBIT graduation status**. The supplied CV calls Zeeshan a graduate but dates the BBIT period through December 2026; the site avoids claiming that the degree is already conferred.
-2. Upload the actual portrait and project previews; replace reserved homepage social placement and optional galleries.
+1. BBIT graduation status is confirmed by the owner as **degree awarded**. The homepage now explicitly states this.
+2. Upload approved project previews and optional galleries; replace the reserved homepage social placement. The current hero art is a deliberate abstract composition, not a portrait placeholder.
 3. Confirm project permissions, employer and client naming, outcome data, real live demo links, and accessibility of images.
 5. Install GT Walsheim with the appropriate license and check fonts across pages.
 6. Verify your email, LinkedIn, and GitHub account links and confirm what contact information should be public.
-7. Test mobile keyboard navigation, project filters, and printer/PDF output in the deployed environment.
-8. Confirm domain, favicon, social image, robots policy, canonical URLs, and the RSS/sitemap endpoints.
+7. Test mobile keyboard navigation, responsive grids, and project filters in the deployed environment.
+8. Confirm domain, favicon, social image, robots policy, canonical URLs, and the sitemap endpoint.
 9. Update `src/pages/privacy.astro` if you enable forms, analytics, or third-party embeds later.
 
 This repository contains no Supabase connection, admin credentials, booking system, payment processing, or user-data collection backend.
