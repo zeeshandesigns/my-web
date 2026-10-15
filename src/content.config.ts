@@ -10,7 +10,7 @@ const projects = defineCollection({
     preview: z.enum(['etg','startex','pulse','abstract']).default('abstract'),
     cover: z.string().optional(),
     /** Add only verified deliverables and actual media; gallery is optional. */
-    gallery: z.array(z.object({src: z.string(), alt: z.string().min(8), caption: z.string().optional()})).default([]),
+    gallery: z.array(z.object({src: z.string(), thumbnail: z.string().optional(), alt: z.string().min(8), caption: z.string().optional()})).default([]),
     projectUrl: z.string().url().optional(),
     repositoryUrl: z.string().url().optional(),
     outcome: z.string().optional(),
