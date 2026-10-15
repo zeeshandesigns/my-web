@@ -7,12 +7,12 @@ import { getCollection } from 'astro:content';
 const projects = (await getCollection('projects', ({data}) => !data.draft)).sort((a,b) => a.data.sortOrder - b.data.sortOrder);
 ---
 <BaseLayout title="Work" description="Selected UI/UX, social media, brand identity and front-end work by Zeeshan Haider.">
-  <section class="page-hero"><div class="container"><div class="hero-columns"><div><span class="eyebrow">01 / PORTFOLIO</span><h1 class="page-title">Selected <span class="soft">work.</span></h1><p class="page-lead">Interfaces, identities, digital campaigns and considered design work from real projects. Explore by discipline or open any project to see its context and scope.</p></div><div class="aside-note">A curated portfolio, with actual project assets and outcomes to be added as they are provided.</div></div></div></section>
+  <section class="page-hero"><div class="container"><div class="hero-columns"><div><span class="eyebrow">01 / PORTFOLIO</span><h1 class="page-title">Selected <span class="soft">Work.</span></h1><p class="page-lead">Interfaces, identities, digital campaigns and considered design work from real projects. Explore by discipline or open any project to see its context and scope.</p></div><div class="aside-note">Explore the case studies below. Project imagery will be updated as approved work is added.</div></div></div></section>
   <section class="inner-section"><div class="container"><div class="toolbar" role="group" aria-label="Filter projects"><button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All work</button><button type="button" class="filter-btn" data-filter="ui" aria-pressed="false">UI/UX</button><button type="button" class="filter-btn" data-filter="social" aria-pressed="false">Social & graphics</button><button type="button" class="filter-btn" data-filter="dev" aria-pressed="false">Development</button></div>
     <div class="search-row"><label class="sr-only" for="projectSearch">Search projects</label><input id="projectSearch" class="search-field" type="search" placeholder="Search work by name or discipline" autocomplete="off" /></div>
     <div class="project-grid">{projects.map((p,i) => <ProjectCard project={p} index={i+1} featured={false} />)}<ReservedProject number="— / 09" /></div>
     <p class="filter-summary" id="filterCount" aria-live="polite">{projects.length} projects displayed · 1 reserved slot</p>
-    <div class="foot-links"><span class="tag">Case study imagery pending</span><span class="tag">No invented metrics or client results</span></div>
+    
   </div></section>
   <CallToAction />
 </BaseLayout>

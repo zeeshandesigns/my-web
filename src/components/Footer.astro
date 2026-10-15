@@ -8,7 +8,7 @@ const year = new Date().getFullYear();
     <div><a href="/" class="footer-logo">{profile.name}<span>.</span></a><p class="footer-note">Multidisciplinary designer · {profile.city}<br/>Open to remote and international opportunities.</p></div>
     <nav aria-label="Footer links" class="footer-links">
       {navigation.map(link => <a href={link.href}>{link.name}</a>)}
-      <a href="/contact/">Contact</a><a href="/privacy/">Privacy</a>
+      <a href="/privacy/">Privacy</a>
       <a href={siteSettings.github} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
       <a href={`mailto:${profile.email}`}>Email ↗</a>
     </nav>

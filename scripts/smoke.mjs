@@ -4,7 +4,7 @@ import path from 'node:path';
 const root = path.resolve('dist');
 const failures = [];
 if (!fs.existsSync(root)) {console.error('Build dist/ first.');process.exit(1);}
-const pagePaths = ['/', '/work/', '/work/elite-top-guards/', '/about/', '/resume/', '/notes/', '/notes/learning-log/', '/contact/', '/privacy/'];
+const pagePaths = ['/', '/work/', '/work/elite-top-guards/', '/about/', '/contact/', '/privacy/'];
 const pathToFile = pathname => path.join(root,pathname.endsWith('/')?`${pathname}index.html`:pathname);
 for(const page of pagePaths) {
   const file = pathToFile(page);
@@ -17,8 +17,9 @@ for(const page of pagePaths) {
     if(!html.includes('name="robots"')) failures.push(`Robots policy missing on ${page}`);
   }
 }
-const required = ['404.html','rss.xml','robots.txt','sitemap.xml','og-cover.png','favicon.svg'];
+const required = ['404.html','robots.txt','sitemap.xml','og-cover.png','favicon.svg'];
 for (const f of required) if(!fs.existsSync(path.join(root,f))) failures.push(`Missing generated artifact: ${f}`);
+for (const retired of ['/resume/','/notes/','/notes/learning-log/','/rss.xml']) if(fs.existsSync(pathToFile(retired))) failures.push(`Retired route still generated: ${retired}`);
 const walk = dir => fs.readdirSync(dir,{withFileTypes:true}).flatMap(d=>d.isDirectory()?walk(path.join(dir,d.name)):[path.join(dir,d.name)]);
 for(const file of walk(root).filter(f=>f.endsWith('.html'))) {
   const html=fs.readFileSync(file,'utf8');

@@ -1,9 +1,9 @@
 /** One place for site navigation and public channels. */
 export const navigation = [
+  { name: 'Home', href: '/' },
   { name: 'Work', href: '/work/' },
   { name: 'About', href: '/about/' },
-  { name: 'Resume', href: '/resume/' },
-  { name: 'Notes', href: '/notes/' },
+  { name: 'Contact', href: '/contact/' },
 ] as const;
 
 export const siteSettings = {

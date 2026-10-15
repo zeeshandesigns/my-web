@@ -22,12 +22,4 @@ const projects = defineCollection({
     draft: z.boolean().default(false),
   }),
 });
-const notes = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/notes' }),
-  schema: z.object({
-    title: z.string(), description: z.string(), category: z.enum(['article','insight','learning']),
-    publishedAt: z.coerce.date(), draft: z.boolean().default(false),
-    tags: z.array(z.string()).default([]), cover: z.string().optional(),
-  }),
-});
-export const collections = { projects, notes };
+export const collections = { projects };

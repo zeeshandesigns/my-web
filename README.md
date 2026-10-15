@@ -1,6 +1,6 @@
 # Zeeshan Haider — Personal Portfolio
 
-A custom, multi-page, static personal portfolio and digital career profile. Built with **Astro 5 + TypeScript**, a clean white/blue visual system, and structured Markdown content. This website represents **Zeeshan Haider**; it is not a Zynk-branded website.
+A custom, multi-page, static personal portfolio with professional experience, education and capabilities on the homepage. Built with **Astro 5 + TypeScript**, a clean white/blue visual system, and structured Markdown content. This website represents **Zeeshan Haider**; it is not a Zynk-branded website.
 
 **Status:** Site implementation is ready for its owner's deployment. Real project screenshots, full case-study results, a personal portrait, and licensed GT Walsheim webfont files are still to be supplied. The domain must also be configured before public launch. The website intentionally uses visible mock visuals and is **not indexed by search engines by default**.
 
@@ -29,31 +29,25 @@ The `.github/workflows/validate.yml` pipeline automatically performs these check
 
 | Route | Page |
 |---|---|
-| `/` | Homepage with four featured work placements (three selected, one reserved) |
+| `/` | Homepage with featured projects, experience, education, skills and tools |
 | `/work/` | All work, client-work discipline filters, search |
 | `/work/<slug>/` | Individual editable case-study pages |
 | `/about/` | Personal background, approach and university activities |
-| `/resume/` | Digital CV with print/save-to-PDF button |
-| `/notes/` | Articles, design insights and learning entries with filters/search |
-| `/notes/learning-log/` | Front-end learning journal |
-| `/notes/<slug>/` | Individual readable articles |
-| `/contact/` | Email, LinkedIn, GitHub and digital resume |
+| `/contact/` | Email, LinkedIn, GitHub and homepage experience link |
 | `/privacy/` | Clear static-site privacy information |
 | `/404.html` | Custom error page |
-| `/rss.xml` | Syndicated Notes feed |
 | `/sitemap.xml` and `/robots.txt` | Generated crawlers' files |
 
 ## Where to change things
 
 - **Personal identity and contact**: `src/data/profile.ts`; site/social settings: `src/data/site.ts`.
 - **Homepage**: `src/components/home/`; reusable page layout: `src/layouts/BaseLayout.astro`.
-- **CV details**: `src/pages/resume.astro`. Role descriptions are based on the CV provided in this chat, not on invented metrics. Print-ready styling lives in `src/styles/global.css`.
+- **Experience, education and skills**: `src/components/home/ExperiencePreview.astro`. Dates and claims are based on the supplied CV; review before public launch.
 - **About/personality**: `src/pages/about.astro`. A few known university activities are included; replace any "photo to be added" caption with the approved actual portrait.
 - **Projects**: `src/content/projects/*.md`; see `examples/project-template.md` and frontmatter schema `src/content.config.ts`. New approved projects automatically get their own page and appear in Work. Add verified screenshots using `cover` and optional `gallery` items, with meaningful image descriptions; add `projectUrl`, `repositoryUrl`, `process`, or `outcome` if applicable.
 - **Homepage featured four projects**: `src/components/home/FeaturedWork.astro`. Currently 2 UI, 1 social, and 1 clearly reserved social slot. Replace `ReservedProject` only once the fourth real client campaign is selected and approved.
-- **Notes**: `src/content/notes/*.md`; see `examples/note-template.md`. Three starter notes are included (two evergreen design pieces and one introductory learning note), drafted for the website and **subject to your editorial review**. Future updates should be written from actual experience. Set `draft: true` to hide an entry.
 - **Design tokens and style**: `src/styles/global.css`; `src/styles/font-installation.md` explains how to install GT Walsheim legally once you supply your files.
-- **Interactions**: `src/scripts/site.ts` implements accessible mobile menu, Work/Notes filters and search, Copy Email, and Print Resume. Navigation and content remain useful without JavaScript.
+- **Interactions**: `src/scripts/site.ts` implements an accessible mobile menu, Work filters/search and Copy Email. Navigation and content remain useful without JavaScript.
 
 ## Adding visuals
 
@@ -63,7 +57,7 @@ No work samples or client-results graphics have been invented. The current abstr
 
 ## Fonts
 
-Montserrat is currently loaded from Google Fonts for body text. GT Walsheim is a licensed typeface and is not distributed in this repository. Current headings use fallback type; when you have your licensed WOFF2 files, follow `src/styles/font-installation.md`.
+Montserrat is currently loaded from Google Fonts for body text. GT Walsheim is a licensed typeface. Files are present under `public/fonts/`, but the font stylesheet is not activated. Confirm redistribution permission before enabling. Current headings use fallback type; when you have your licensed WOFF2 files, follow `src/styles/font-installation.md`.
 
 ## Owner deployment (Vercel or another static host)
 
@@ -82,10 +76,9 @@ PUBLIC_ALLOW_INDEXING=false
 
 ## Final owner review
 
-1. Review any career details on the resume, notably **BBIT graduation status**. The supplied CV calls Zeeshan a graduate but dates the BBIT period through December 2026; the site avoids claiming that the degree is already conferred.
+1. Review any career details on the homepage, notably **BBIT graduation status**. The supplied CV calls Zeeshan a graduate but dates the BBIT period through December 2026; the site avoids claiming that the degree is already conferred.
 2. Upload the actual portrait and project previews; replace reserved homepage social placement and optional galleries.
 3. Confirm project permissions, employer and client naming, outcome data, real live demo links, and accessibility of images.
-4. Review the three assistant-drafted starter Notes in your voice and add real learning entries over time.
 5. Install GT Walsheim with the appropriate license and check fonts across pages.
 6. Verify your email, LinkedIn, and GitHub account links and confirm what contact information should be public.
 7. Test mobile keyboard navigation, project filters, and printer/PDF output in the deployed environment.

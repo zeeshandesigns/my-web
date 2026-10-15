@@ -55,31 +55,6 @@ filters.forEach(button => button.addEventListener('click', () => {
 }));
 search?.addEventListener('input', filterProjects);
 
-const noteFilters = document.querySelectorAll<HTMLButtonElement>('[data-note-filter]');
-const noteCards = document.querySelectorAll<HTMLElement>('[data-note-category]');
-const noteSearch = document.querySelector<HTMLInputElement>('#noteSearch');
-const noteCount = document.querySelector<HTMLElement>('#noteFilterCount');
-let noteCategory = 'all';
-function filterNotes() {
-  const query = (noteSearch?.value || '').trim().toLocaleLowerCase();
-  let count = 0;
-  noteCards.forEach(card => {
-    const matches = (noteCategory === 'all' || card.dataset.noteCategory === noteCategory) && (!query || (card.dataset.search || '').toLocaleLowerCase().includes(query));
-    card.hidden = !matches;
-    if (matches) count++;
-  });
-  if (noteCount) noteCount.textContent = `${count} note${count === 1 ? '' : 's'} displayed`;
-}
-noteFilters.forEach(button => button.addEventListener('click', () => {
-  noteCategory = button.dataset.noteFilter || 'all';
-  noteFilters.forEach(other => {
-    other.setAttribute('aria-pressed', String(other === button));
-    other.classList.toggle('active', other === button);
-  });
-  filterNotes();
-}));
-noteSearch?.addEventListener('input', filterNotes);
-
 const copyButton = document.querySelector<HTMLButtonElement>('#copyEmail');
 const copyFeedback = document.querySelector<HTMLElement>('#copyFeedback');
 copyButton?.addEventListener('click', async () => {
@@ -93,4 +68,3 @@ copyButton?.addEventListener('click', async () => {
   }
 });
 
-document.querySelector<HTMLButtonElement>('#printResume')?.addEventListener('click', () => window.print());

@@ -1,7 +1,7 @@
 ---
 import { navigation } from '../data/site';
 const route = Astro.url.pathname;
-const active = (href: string) => route === href || route.startsWith(href);
+const active = (href: string) => href === '/' ? route === '/' : route === href || route.startsWith(href);
 ---
 <header class="site-header" id="site-header">
   <div class="container header-inner">
