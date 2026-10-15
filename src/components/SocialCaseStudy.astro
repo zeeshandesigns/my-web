@@ -19,11 +19,47 @@ const slots=Array.from({length:9},(_,i)=>gallery[i]??null);
   </div></div>
  </div></section>
  <section class="social-study-facts"><div class="container social-study-facts-inner"><div><span>Client</span><strong>{client.name}</strong></div><div><span>Industry</span><strong>{client.industry}</strong></div><div><span>Market</span><strong>{client.location}</strong></div><div><span>My Role</span><strong>{d.role}</strong></div></div></section>
- <section class="social-study-context"><div class="container social-study-context-grid"><div><span class="eyebrow">01 / THE CREATIVE BRIEF</span><h2>Designed for the <em>Audience.</em></h2><p>{client.focus}. The aim is to communicate the offer with the visual language suited to the client's sector.</p><div class="social-study-audience"><strong>Audience Context</strong><p>{client.audience}</p><small>Working marketing profile, not measured customer analytics.</small></div></div><div class="social-study-direction"><span class="eyebrow">DESIGN SCOPE</span><h3>Visual Thinking Across Brands.</h3><p>{d.context}</p><p>{d.deliverables}</p></div></div></section>
- <section class="social-study-gallery-wrap" id="selected-creatives"><div class="container"><div class="social-study-gallery-heading"><div><span class="eyebrow">02 / SELECTED CREATIVES</span><h2>Campaign Gallery<span>.</span></h2></div><p>{gallery.length ? 'Select any design to see it in full detail.' : 'Nine gallery positions are ready. Artwork will appear as the approved samples are uploaded.'}</p></div>
+ <section class="social-study-gallery-wrap" id="selected-creatives"><div class="container"><div class="social-study-gallery-heading"><div><span class="eyebrow">01 / SELECTED CREATIVES</span><h2>Campaign Gallery<span>.</span></h2></div><p>{gallery.length ? 'Select any design to see it in full detail.' : 'Nine gallery positions are ready. Artwork will appear as the approved samples are uploaded.'}</p></div>
  <div class="social-case-gallery">{slots.map((item,i)=>item ?
   <figure class="social-artwork"><a href={item.src} class="social-gallery-link" target="_blank" rel="noopener noreferrer"><img src={item.thumbnail ?? item.src} data-full-src={item.src} alt={item.alt} loading="lazy" decoding="async"/><span class="social-artwork-zoom" aria-hidden="true">↗</span></a><figcaption>{String(i+1).padStart(2,'0')} / {String(gallery.length).padStart(2,'0')} — {item.caption ?? 'Selected Creative'}</figcaption></figure> :
   <div class="social-artwork-pending"><span>{String(i+1).padStart(2,'0')}</span><strong>Artwork Slot</strong><small>Image to Be Added</small></div>)}</div>
  </div></section>
- <section class="social-study-client"><div class="container"><div class="social-study-client-panel"><div><span class="eyebrow">03 / CLIENT IN CONTEXT</span><h2>Behind the <em>Brand.</em></h2><p>{client.name} operates in {client.industry.toLowerCase()}. Its website is included for business context and is not a claim of website design by me.</p></div><div class="social-study-client-action">{client.website ? <a href={client.website} rel="noopener noreferrer" target="_blank">Visit Client Website ↗</a> : <span>Website Not Confirmed</span>}</div></div></div></section>
+
+ <section class="social-study-end" aria-labelledby="client-detail-heading"><div class="container">
+   <div class="social-study-endbar">
+     <div class="social-study-end-identity">
+       <span class="eyebrow">CLIENT IN CONTEXT</span>
+       <h2 id="client-detail-heading">{client.name}</h2>
+       <p>{client.industry} <span aria-hidden="true">·</span> {client.location}</p>
+     </div>
+     <div class="social-study-end-link">
+       {client.website ? <a href={client.website} rel="noopener noreferrer" target="_blank">Client Website <span aria-hidden="true">↗</span></a> : <span>Website Not Confirmed</span>}
+     </div>
+   </div>
+   <details class="social-study-brief">
+     <summary class="social-study-brief-summary">
+       <span class="social-study-brief-title"><span class="eyebrow">02 / PROJECT DETAILS</span><strong>The Creative Brief &amp; My Contribution</strong><small>Optional background on the audience, approach and scope.</small></span>
+       <span class="social-study-brief-plus" aria-hidden="true">+</span>
+     </summary>
+     <div class="social-study-brief-body">
+       <div class="social-study-brief-item">
+         <span class="eyebrow">CREATIVE DIRECTION</span>
+         <h3>Designed for the <em>Audience.</em></h3>
+         <p>{client.focus}. The goal was to communicate each service or offer in a visual language suited to the business.</p>
+       </div>
+       <div class="social-study-brief-item">
+         <span class="eyebrow">AUDIENCE CONTEXT</span>
+         <h3>Who We Designed For.</h3>
+         <p>{client.audience}</p>
+         <small>Working marketing profile, not verified customer analytics.</small>
+       </div>
+       <div class="social-study-brief-item">
+         <span class="eyebrow">MY SCOPE</span>
+         <h3>Social Media Visuals.</h3>
+         <p>{d.deliverables}</p>
+       </div>
+     </div>
+   </details>
+   <p class="social-study-credit">The client website is linked for business context, not as a claim of website development.</p>
+ </div></section>
 </div>

@@ -195,3 +195,47 @@
  .work-gallery-first .social-client-grid{gap:22px 10px}
 }
 @media(prefers-reduced-motion:reduce){.work-filter-chevron{transition:none}}
+
+
+/* Portfolio-first case studies: artwork before a compact, optional client brief. */
+.social-study-gallery-wrap{padding-top:66px;padding-bottom:78px}
+.social-study-end{background:#fff;padding:45px 0 88px}
+.social-study-endbar{display:flex;align-items:center;justify-content:space-between;gap:22px;padding:18px 0 32px;border-bottom:1px solid #e4ebf5}
+.social-study-end-identity h2{font:650 clamp(23px,2.8vw,37px)/1.2 var(--headline);letter-spacing:-.055em;margin:8px 0}
+.social-study-end-identity p{font-size:12px;color:#7a899e;margin:0}
+.social-study-end-link>a,.social-study-end-link>span{display:inline-flex;align-items:center;justify-content:center;text-align:center;border:1px solid #d9e5fb;border-radius:11px;padding:13px 18px;color:var(--client-color,#2056ba);font-size:12px;font-weight:800;white-space:nowrap;background:#f8faff}
+.social-study-end-link>a:hover{border-color:#abc6f9;background:#eef4ff}
+.social-study-brief{border:1px solid #e3eaf5;border-radius:17px;background:#f9fbff;margin-top:24px;overflow:hidden}
+.social-study-brief-summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:20px;cursor:pointer;padding:21px 27px;outline-offset:3px}
+.social-study-brief-summary::-webkit-details-marker{display:none}
+.social-study-brief-summary::marker{content:""}
+.social-study-brief-summary:hover{background:#f3f7ff}
+.social-study-brief-title{display:flex;flex-direction:column;gap:4px}
+.social-study-brief-title .eyebrow{font-size:9px;margin-bottom:3px}
+.social-study-brief-title strong{font:650 clamp(19px,2.25vw,28px)/1.2 var(--headline);letter-spacing:-.04em;color:#1b2d4b}
+.social-study-brief-title small{color:#78869d;font-size:11px;line-height:1.5}
+.social-study-brief-plus{flex:0 0 34px;height:34px;display:grid;place-items:center;border:1px solid #cbd9ee;background:#fff;color:#3969c1;border-radius:50%;font-size:24px;font-weight:400;transition:transform .2s}
+.social-study-brief[open] .social-study-brief-plus{transform:rotate(45deg)}
+.social-study-brief-body{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;border-top:1px solid #e3eaf5;padding:27px;background:#fff}
+.social-study-brief-item{min-width:0;padding-right:20px}
+.social-study-brief-item:not(:last-child){border-right:1px solid #e9eff7}
+.social-study-brief-item .eyebrow{font-size:9px}
+.social-study-brief-item h3{font:650 20px/1.25 var(--headline);letter-spacing:-.03em;color:#203656;margin:14px 0}
+.social-study-brief-item h3 em{font-style:normal;color:var(--client-color)}
+.social-study-brief-item p{font-size:12px;line-height:1.85;color:#6a7a92;margin:0}
+.social-study-brief-item small{display:block;font-size:10px;color:#8795a9;margin-top:12px;line-height:1.6}
+.social-study-credit{margin:18px 2px 0;color:#929bab;font-size:10px;line-height:1.6}
+.project-modal-content .social-study-gallery-wrap{padding-top:45px;padding-bottom:54px}
+.project-modal-content .social-study-end{padding:25px 0 60px}
+@media(max-width:760px){
+ .social-study-gallery-wrap{padding:45px 0 55px}
+ .social-study-end{padding:30px 0 60px}
+ .social-study-endbar{align-items:flex-start;flex-direction:column;gap:19px;padding-bottom:25px}
+ .social-study-brief-summary{padding:18px 17px}
+ .social-study-brief-body{grid-template-columns:1fr;gap:21px;padding:20px 17px}
+ .social-study-brief-item{padding:0}
+ .social-study-brief-item:not(:last-child){border-right:0;border-bottom:1px solid #e9eff7;padding-bottom:22px}
+ .project-modal-content .social-study-gallery-wrap{padding-top:35px}
+ .project-modal-content .social-study-end{padding:25px 0 42px}
+}
+@media(prefers-reduced-motion:reduce){.social-study-brief-plus{transition:none}}
