@@ -4,7 +4,7 @@ import path from 'node:path';
 const root = path.resolve('dist');
 const failures = [];
 if (!fs.existsSync(root)) {console.error('Build dist/ first.');process.exit(1);}
-const pagePaths = ['/', '/work/', '/work/elite-top-guards/', '/about/', '/contact/', '/privacy/'];
+const pagePaths = ['/', '/work/', '/work/elite-top-guards/', '/work/jp-beauty-studio/', '/work/zoya-beauty-hub/', '/about/', '/contact/', '/privacy/'];
 const pathToFile = pathname => path.join(root,pathname.endsWith('/')?`${pathname}index.html`:pathname);
 for(const page of pagePaths) {
   const file = pathToFile(page);

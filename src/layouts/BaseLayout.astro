@@ -3,6 +3,8 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import IntroBar from '../components/IntroBar.astro';
 import '../styles/global.css';
+import '../styles/social-gallery.css';
+import ProjectModal from '../components/ProjectModal.astro';
 import { profile } from '../data/profile';
 import { siteSettings } from '../data/site';
 interface Props { title: string; description: string; image?: string; noindex?: boolean; article?: boolean; }
@@ -58,6 +60,7 @@ const schema = {
       <IntroBar />
       <main id="main-content" tabindex="-1"><slot /></main>
       <Footer />
+      <ProjectModal />
     </div>
     <script>import '../scripts/site';</script>
   </body>

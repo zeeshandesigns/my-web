@@ -17,6 +17,7 @@ const projects = defineCollection({
     process: z.string().optional(),
     year: z.string().optional(),
     sortOrder: z.number(), featured: z.boolean().default(false),
+    caseStudyType: z.enum(["standard","social"]).default("standard"), clientSlug: z.string().optional(), industry: z.string().optional(),
     role: z.string(), engagement: z.string(), contribution: z.string(),
     context: z.string(), deliverables: z.string(),
     draft: z.boolean().default(false),

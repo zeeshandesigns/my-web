@@ -1,0 +1,19 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { socialClients, type SocialClientSlug } from '../data/socialClients';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project }=Astro.props;
+const d=project.data;
+const client=socialClients[d.clientSlug as SocialClientSlug];
+const first=d.gallery[0];
+---
+<article class="social-client-card" data-type="social" data-industry={client.sector} data-search={`${d.title} ${d.description} ${client.industry} ${client.location} ${client.audience}`} style={`--client-color:${client.accent};--client-wash:${client.wash};`}>
+ <a href={`/work/${project.id}/`} class="social-client-link" aria-label={`View ${client.name} social media designs`}>
+  <div class="social-client-art">
+   {first ? <img src={first.thumbnail ?? first.src} alt={first.alt} loading="lazy" /> : <div class="social-client-monogram" aria-hidden="true"><span class="social-client-faint">{client.initials}</span><strong>{client.initials}</strong><small>{project.id==='jp-beauty-studio'?'9 DESIGNS SELECTED':'CREATIVES TO BE ADDED'}</small></div>}
+   <span class="social-client-corner" aria-hidden="true">↗</span>
+   <span class="social-client-asset-note">{d.gallery.length ? `${d.gallery.length} DESIGNS` : 'GALLERY IN PREPARATION'}</span>
+  </div>
+  <div class="social-client-bottom"><div><span class="social-client-sector">{client.industry}</span><h3>{client.name}</h3><p>{client.focus}</p></div><span class="social-client-number">↗</span></div>
+ </a>
+</article>

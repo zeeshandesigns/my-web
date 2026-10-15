@@ -3,6 +3,7 @@ import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CallToAction from '../../components/CallToAction.astro';
+import SocialCaseStudy from '../../components/SocialCaseStudy.astro';
 interface Props { project: CollectionEntry<'projects'>; next?: CollectionEntry<'projects'>; }
 export async function getStaticPaths() {
   const projects = (await getCollection('projects', ({data})=>!data.draft)).sort((a,b)=>a.data.sortOrder-b.data.sortOrder);
@@ -13,6 +14,7 @@ const { Content } = await render(project);
 const d=project.data;
 ---
 <BaseLayout title={d.title} description={d.description} image={d.cover}>
+  {d.caseStudyType === 'social' ? <SocialCaseStudy project={project} /> : <Fragment>
   <section class="page-hero"><div class="container"><div class="hero-columns"><div><div class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/work/">Work</a><span>/</span><b>{d.title}</b></div><h1 class="page-title">{d.title}</h1><p class="page-lead">{d.description}</p></div><div class="aside-note">The project context and deliverables are outlined below. Additional approved work samples will follow.</div></div></div></section>
   <section class="inner-section"><div class="container"><div class:list={['showcase-block', {'has-cover': !!d.cover}]}>{d.cover ? <img src={d.cover} alt={`${d.title} project artwork`} class="showcase-image" /> : <><span class="portrait-mark" aria-hidden="true">ZH</span><div class="case-center"><div class="eyebrow">PROJECT VISUALS</div><h2 class="large">{d.showcaseLabel}</h2><p>The final project imagery will appear here. This visual is a layout placeholder, not a screenshot of the work.</p></div><span class="placeholder-flag">Placeholder visual</span></>}</div><div class="project-intro"><div><span class="eyebrow">PROJECT OVERVIEW</span><h2 class="small-title">The Work at a Glance.</h2><p class="body-copy">{d.description}</p></div><div class="facts"><div class="fact"><div class="fact-label">Discipline</div><div class="fact-value">{d.tags.join(' · ')}</div></div><div class="fact"><div class="fact-label">Role</div><div class="fact-value">{d.role}</div></div><div class="fact"><div class="fact-label">Engagement</div><div class="fact-value">{d.engagement}</div></div><div class="fact"><div class="fact-label">Contribution</div><div class="fact-value">{d.contribution}</div></div></div></div></div></section>
   <section class="inner-section muted-bg"><div class="container"><div class="section-head"><div><span class="eyebrow">BEHIND THE PROJECT</span><h2 class="section-title">Context & Contribution.</h2></div><p class="section-description">A concise look at the assignment and design deliverables.</p></div><div class="case-steps"><div class="case-step"><h3>Context</h3><p>{d.context}</p></div><div class="case-step"><h3>Deliverables</h3><p>{d.deliverables}</p></div><div class="case-step"><h3>Visual Evidence</h3><p>Supporting screenshots and outcomes will appear when available.</p></div></div></div></section>
@@ -21,4 +23,5 @@ const d=project.data;
   <section class="inner-section"><div class="container"><div class="prose"><Content /></div>
   {(d.projectUrl || d.repositoryUrl) && <div class="foot-links">{d.projectUrl && <a class="btn btn-blue" href={d.projectUrl} target="_blank" rel="noopener noreferrer">View live project ↗</a>}{d.repositoryUrl && <a class="btn btn-ghost" href={d.repositoryUrl} target="_blank" rel="noopener noreferrer">View code ↗</a>}</div>}<div class="foot-links" style="margin-top:35px"><a class="text-link" href="/work/">← All work</a></div>{next && <a class="next-project" href={`/work/${next.id}/`}><div><span>NEXT PROJECT</span><br/><strong>{next.data.title}</strong></div><span class="text-link">View project ↗</span></a>}</div></section>
   <CallToAction />
+  </Fragment>}
 </BaseLayout>

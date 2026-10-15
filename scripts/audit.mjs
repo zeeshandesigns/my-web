@@ -15,6 +15,8 @@ const slugs = new Set(projectFiles.map(file=>file.slice(0,-3)));
 const originalProjects = ['elite-top-guards','startex-marketing','pulse-real-estate','nutrisense-ai','uk-security-sector','classy-jumbo-master','ibit-convocation','twicsy-ux-audit'];
 for (const slug of originalProjects) check(slugs.has(slug), `Missing original CV project: ${slug}`);
 check(slugs.size === projectFiles.length, 'Duplicate project slugs');
+check(slugs.size === 20, 'Expected 8 existing projects and 12 social clients');
+for(const f of ['src/components/SocialCaseStudy.astro','src/components/SocialClientCard.astro','src/components/ProjectModal.astro']) check(exists(f), 'Missing component '+f);
 for (const file of projectFiles) {
   const text = read(`src/content/projects/${file}`);
   for (const key of ['title','description','category','filters','tags','sortOrder','showcaseLabel','preview','role','engagement','contribution','context','deliverables','draft'])
@@ -22,9 +24,9 @@ for (const file of projectFiles) {
   check(text.startsWith('---\n'), `${file}: frontmatter delimiter missing`);
 }
 const featured = read('src/components/home/FeaturedWork.astro');
-for(const slug of ['elite-top-guards','startex-marketing','pulse-real-estate']) check(featured.includes(`'${slug}'`), `Missing featured project ${slug}`);
+for(const slug of ['elite-top-guards','startex-marketing','pulse-real-estate','jp-beauty-studio']) check(featured.includes(`'${slug}'`), `Missing featured project ${slug}`);
 check(read('src/pages/index.astro').includes('<ReservedProject')===false, 'Home reserved slot should belong to FeaturedWork component');
-check(featured.includes('<ReservedProject'), 'Featured Work needs second social media placeholder');
+check(!featured.includes('<ReservedProject'), 'Featured Work must show four actual projects');
 check(exists('src/content.config.ts'), 'Missing collections schema');
 check(exists('src/pages/sitemap.xml.ts') && exists('src/pages/robots.txt.ts'),'Missing SEO endpoints');
 check(exists('public/og-cover.png'), 'Missing site social share image');

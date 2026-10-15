@@ -1,0 +1,11 @@
+---
+import { getCollection } from 'astro:content';
+const projects=(await getCollection('projects',({data})=>!data.draft)).sort((a,b)=>a.data.sortOrder-b.data.sortOrder).map(p=>({title:p.data.title,url:`/work/${p.id}/`}));
+---
+<dialog id="projectModal" class="project-modal" aria-labelledby="projectModalTitle" data-projects={JSON.stringify(projects)}>
+ <header class="project-modal-toolbar"><div><span>ZH / PROJECT PREVIEW</span><strong id="projectModalTitle">Project Preview</strong></div><div class="project-modal-actions"><a href="/work/" id="projectModalDirectLink" data-project-modal-bypass>Open Page ↗</a><button type="button" id="projectModalClose" aria-label="Close project preview">✕</button></div></header>
+ <div class="project-modal-scroll" id="projectModalScroll"><div class="project-modal-loading" id="projectModalLoading" role="status">Loading Project…</div><div id="projectModalContent" class="project-modal-content"></div></div>
+ <nav class="project-modal-navigation" aria-label="Browse projects"><button type="button" id="projectModalPrevious">← Previous</button><span id="projectModalCounter">1 / {projects.length}</span><button type="button" id="projectModalNext">Next →</button></nav>
+ <div class="project-modal-image-viewer" id="projectModalImageViewer" hidden><header><span id="projectModalImageCounter">1 / 9</span><button type="button" id="projectModalImageClose">Close ✕</button></header><div class="project-modal-image-stage"><img id="projectModalExpandedImage" alt=""/></div><nav><button type="button" id="projectModalImagePrevious">← Previous Image</button><button type="button" id="projectModalImageNext">Next Image →</button></nav></div>
+</dialog>
+<script>import '../scripts/project-modal';</script>

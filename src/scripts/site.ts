@@ -25,35 +25,40 @@ document.addEventListener('pointerdown', event => {
 });
 window.matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
 
-const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+const industryButtons = document.querySelectorAll<HTMLButtonElement>('[data-industry-filter]');
 const cards = document.querySelectorAll<HTMLElement>('[data-type]');
 const counter = document.querySelector<HTMLElement>('#filterCount');
 const search = document.querySelector<HTMLInputElement>('#projectSearch');
-let category = 'all';
+let discipline = 'all';
+let industry = 'all';
 function filterProjects() {
   const query = (search?.value || '').trim().toLocaleLowerCase();
-  let count = 0;
-  let reserved = false;
+  let visible = 0;
   cards.forEach(card => {
-    const typeMatch = category === 'all' || (card.dataset.type ?? '').split(' ').includes(category);
-    const searchMatch = !query || (card.dataset.search || '').toLocaleLowerCase().includes(query);
-    const visible = typeMatch && searchMatch;
-    card.hidden = !visible;
-    if (visible && card.dataset.placeholder === 'true') reserved = true;
-    else if (visible) count++;
+    const types = (card.dataset.type || '').split(' ');
+    const matches = (discipline === 'all' || types.includes(discipline)) &&
+      (industry === 'all' || card.dataset.industry === industry) &&
+      (!query || (card.dataset.search || '').toLocaleLowerCase().includes(query));
+    card.hidden = !matches;
+    if(matches) visible++;
   });
-  if (counter) counter.textContent = `${count} project${count === 1 ? '' : 's'} displayed${reserved ? ' · 1 reserved slot' : ''}`;
+  document.querySelectorAll<HTMLElement>('[data-project-section]').forEach(section => {
+    section.hidden = !Array.from(section.querySelectorAll<HTMLElement>('[data-type]')).some(card => !card.hidden);
+  });
+  if(counter) counter.textContent = visible + ' project' + (visible === 1 ? '' : 's') + ' displayed';
 }
-filters.forEach(button => button.addEventListener('click', () => {
-  category = button.dataset.filter ?? 'all';
-  filters.forEach(other => {
-    const selected = other === button;
-    other.classList.toggle('active', selected);
-    other.setAttribute('aria-pressed', String(selected));
-  });
+filterButtons.forEach(button=>button.addEventListener('click',()=>{
+  discipline = button.dataset.filter || 'all';
+  filterButtons.forEach(b=>{const yes=b===button;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes))});
   filterProjects();
 }));
-search?.addEventListener('input', filterProjects);
+industryButtons.forEach(button=>button.addEventListener('click',()=>{
+  industry = button.dataset.industryFilter || 'all';
+  industryButtons.forEach(b=>{const yes=b===button;b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes))});
+  filterProjects();
+}));
+search?.addEventListener('input',filterProjects);
 
 const copyButton = document.querySelector<HTMLButtonElement>('#copyEmail');
 const copyFeedback = document.querySelector<HTMLElement>('#copyFeedback');
