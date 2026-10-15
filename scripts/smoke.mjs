@@ -17,6 +17,12 @@ for(const page of pagePaths) {
     if(!html.includes('name="robots"')) failures.push(`Robots policy missing on ${page}`);
   }
 }
+// The J&P gallery must ship real optimized images, not broken paths.
+const jpFiles = ['01-henna-tattoos','02-facial-waxing','03-chest-waxing','04-eyebrow-threading','05-hot-oils-treatment','06-vajacial-skincare','07-cluster-lashes','08-full-leg-waxing','09-yoni-steam'];
+for(const name of jpFiles) for(const suffix of ['','-thumb']) {
+  const asset='images/social/jp-beauty-studio/'+name+suffix+'.webp';
+  if(!fs.existsSync(path.join(root,asset))) failures.push('Missing J&P artwork: '+asset);
+}
 const required = ['404.html','robots.txt','sitemap.xml','og-cover.png','favicon.svg'];
 for (const f of required) if(!fs.existsSync(path.join(root,f))) failures.push(`Missing generated artifact: ${f}`);
 for (const retired of ['/resume/','/notes/','/notes/learning-log/','/rss.xml']) if(fs.existsSync(pathToFile(retired))) failures.push(`Retired route still generated: ${retired}`);

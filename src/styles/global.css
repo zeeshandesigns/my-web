@@ -494,18 +494,3 @@ html { scroll-padding-top: 24px; }
  .footer-contact-arrow,.footer-to-top svg{transition:none}
  .footer-contact-cta:hover .footer-contact-arrow,.footer-to-top:hover svg{transform:none}
 }
-
-/* Three-column project gallery on desktop; keep tablet and mobile easy to scan. */
-@media (min-width: 1024px) {
-  .work-page-project-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 35px 22px;
-  }
-  .work-page-project-grid .project-visual {
-    height: auto;
-    aspect-ratio: 1.34;
-  }
-  .work-page-project-grid .project-name {
-    font-size: clamp(20px, 1.65vw, 24px);
-  }
-}

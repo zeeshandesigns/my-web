@@ -25,6 +25,10 @@ document.addEventListener('pointerdown', event => {
 });
 window.matchMedia('(min-width: 761px)').addEventListener('change', event => { if (event.matches) setMenu(false); });
 
+const dock = document.querySelector<HTMLDetailsElement>('#workFilterDock');
+const resetFilters = document.querySelector<HTMLButtonElement>('#workFilterReset');
+const showProjects = document.querySelector<HTMLButtonElement>('#workFilterDone');
+const emptyState = document.querySelector<HTMLElement>('#workNoResults');
 const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
 const industryButtons = document.querySelectorAll<HTMLButtonElement>('[data-industry-filter]');
 const cards = document.querySelectorAll<HTMLElement>('[data-type]');
@@ -46,7 +50,8 @@ function filterProjects() {
   document.querySelectorAll<HTMLElement>('[data-project-section]').forEach(section => {
     section.hidden = !Array.from(section.querySelectorAll<HTMLElement>('[data-type]')).some(card => !card.hidden);
   });
-  if(counter) counter.textContent = visible + ' project' + (visible === 1 ? '' : 's') + ' displayed';
+  if(counter) counter.textContent = visible + ' project' + (visible === 1 ? '' : 's') + ' visible';
+  if(emptyState) emptyState.hidden = visible !== 0;
 }
 filterButtons.forEach(button=>button.addEventListener('click',()=>{
   discipline = button.dataset.filter || 'all';
@@ -59,6 +64,22 @@ industryButtons.forEach(button=>button.addEventListener('click',()=>{
   filterProjects();
 }));
 search?.addEventListener('input',filterProjects);
+function resetPortfolioFilters() {
+  discipline='all'; industry='all';
+  if(search) search.value='';
+  filterButtons.forEach(b=>{const yes=b.dataset.filter==='all';b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
+  industryButtons.forEach(b=>{const yes=b.dataset.industryFilter==='all';b.classList.toggle('active',yes);b.setAttribute('aria-pressed',String(yes));});
+  filterProjects();
+}
+resetFilters?.addEventListener('click',resetPortfolioFilters);
+showProjects?.addEventListener('click',()=>{if(dock) dock.open=false;});
+dock?.addEventListener('keydown',(e:KeyboardEvent)=>{
+  if(e.key==='Escape'){dock.open=false;dock.querySelector<HTMLElement>('summary')?.focus();}
+});
+document.addEventListener('pointerdown',event=>{
+  if(dock?.open && event.target instanceof Node && !dock.contains(event.target)) dock.open=false;
+});
+if(dock) filterProjects();
 
 const copyButton = document.querySelector<HTMLButtonElement>('#copyEmail');
 const copyFeedback = document.querySelector<HTMLElement>('#copyFeedback');
